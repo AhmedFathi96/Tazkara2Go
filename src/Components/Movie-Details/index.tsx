@@ -33,13 +33,15 @@ const MovieDetails:React.FC = (props:any) =>{
     }, []);
     useEffect(() => {
         dispatch(getMovieWorkersRequested({id:id}));
+        dispatch(getMoviesRequested());
         findmovie();
     }, []);
 
-    useEffect(() => {
-        console.log("======================>", id , movie)
-
-    }, [movie]);
+    // useEffect(() => {
+    //     dispatch(getMovieWorkersRequested({id:id}));
+    //     dispatch(getMoviesRequested());
+    //     findmovie();
+    // }, [id,cast,crew]);
     const responsive = {
         desktop: {
             breakpoint: { max: 3000, min: 1024 },

@@ -14,6 +14,7 @@ import configureStore from './React-Redux/store';
 import {UAParser} from 'ua-parser-js';
 //import './Styles/NotFound.css';
 import 'react-multi-carousel/lib/styles.css';
+import CinemaTimes from "./Components/Booking-With-Cinema/CinemaTimes";
 
 const store = configureStore();
 
@@ -70,6 +71,13 @@ function App() {
                         <Booking {...props} />
                       )}
                       path="/movie-booking/:id"
+                      exact
+                    />
+                    <Route
+                      component={(props) => (
+                        <CinemaTimes {...props} />
+                      )}
+                      path="/cinema-times/:cid/:shid"
                       exact
                     />
           </Switch>
