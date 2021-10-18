@@ -68,7 +68,7 @@ function App() {
                       />
                       <Route
                       component={(props) => (
-                        <Booking {...props} />
+                        <CinemaTimes {...props} />
                       )}
                       path="/movie-booking/:id"
                       exact

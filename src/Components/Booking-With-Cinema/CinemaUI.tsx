@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const CinemaUi = (props) => {
+const CinemaUi:React.FC = (props:any) => {
     const [cinema] = useState(props.cenima);
     const id=props.match.params.id;
  
@@ -40,18 +40,18 @@ const CinemaUi = (props) => {
       timein: "12:00 AM"
       }
       ];
-      function dateRange(startDate, endDate,time, steps = 1) {
+      const dateRange =(startDate:any, endDate:any,time:any, steps = 1) =>{
        
         const dateArray = [];
-        let obj={
+        let obj:any={
           date:Date.now(),
           times:[]
         };
         let currentDate = new Date(startDate);
       
         while (currentDate <= new Date(endDate)) {
-         obj.date= new Date(currentDate);
-         obj.times.push(time);
+          obj.date= new Date(currentDate);
+          obj.times.push(time);
         // console.log("obj",obj)
           dateArray.push(obj);
           // Use UTC date to prevent problems with time zones and DST
@@ -62,7 +62,7 @@ const CinemaUi = (props) => {
         return dateArray;
       }
       //console.log(dateRange("2021/10/12","2021/10/14","12:00 AM"))
-      function timesForDate(){
+      const timesForDate = ()=>{
         let arrb=[];
         
         for (let i = 0; i < times.length; i++) {
@@ -73,9 +73,9 @@ const CinemaUi = (props) => {
         }
         return arrb;
       }
-   function setDefaultCinemaImg(){
-     document.getElementById("cinemaimg").src=process.env.PUBLIC_URL+"/assets/images/cast/cast02.jpg";
-   }
+    // const setDefaultCinemaImg = () =>{
+    //   document.getElementById("cinemaimg")?.src=process.env.PUBLIC_URL+"/assets/images/cast/cast02.jpg";
+    // }
     
   return (
     <div className="item  col-lg-3">
@@ -87,7 +87,7 @@ const CinemaUi = (props) => {
               src={
                 "http://www.tazkara2go.com:805/images/CinemaImages/"+ cinema.CinemaId +"_1.jpg"
               }
-             
+            
               
               alt="cinema"
             />
@@ -111,23 +111,3 @@ const CinemaUi = (props) => {
 };
 
 export default CinemaUi;
-// <div className="m-2"
-     
-//       style={{ width: "11rem", cursor: "pointer" }}
-//       onClick={() => props.cenimaMovieTimes(cinema.IpAdress)}
-//     >
-//       <img
-//       id="cinemaimg"
-//         src={"http://www.tazkara2go.com:805/images/CinemaImages/"+ cinema.CinemaId +"_1.jpg"}
-//         className="card-img-bottom rounded-circle image-shadow"
-//         width="50%"
-//         alt="..."
-//         onError={setDefaultCinemaImg}
-//       />
-
-//       <div className="card-body" >
-//         <p className="card-title text-center text-whight font-bolder" >
-//           {cinema.CinemaNamE} <br/><a href={cinema.location}><i className="fas fa-map-marker-alt text-danger"></i></a>
-//         </p>
-//       </div>
-//     </div>

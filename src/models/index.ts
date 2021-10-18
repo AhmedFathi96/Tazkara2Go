@@ -33,4 +33,5 @@ export interface ICinema{
     CinemaId: string,
     CinemaNamA: string,
     CinemaNamE: string,
+    IpAdress:string
 }

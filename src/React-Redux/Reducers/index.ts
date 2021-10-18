@@ -4,13 +4,15 @@ import { cinemasReducer } from './cinemas-reducer';
 import { movieWorkersReducer } from './movie-workers-reducer';
 import { movieCinemaTimesReducer } from './movie-cinema-times-reducer';
 import { movieCinemasReducer } from './movie-cinemas-reducer';
+import { movieScheduleReducer } from './movie-schedule-reducer';
 
 export const rootReducer = combineReducers({
     moviesReducer,
     movieWorkersReducer,
     movieCinemasReducer,
     movieCinemaTimesReducer,
-    cinemasReducer
+    cinemasReducer,
+    movieScheduleReducer
 });
 type rootReducer = typeof rootReducer;
 

@@ -21,3 +21,6 @@ export const getMovieCinemasAction=genericAction(getMovieCinemas);
 ////Movie Cinema Times
 const getMovieCinemaTimes='GET-Movie-Cinema-Times';
 export const getMovieCinemaTimesAction=genericAction(getMovieCinemaTimes);
+
+const getMovieSchedule= 'GET-MOVIE-SCHEDULE';
+export const getMovieScheduleAction = genericAction(getMovieSchedule);
