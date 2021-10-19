@@ -24,3 +24,7 @@ export const getMovieCinemaTimesAction=genericAction(getMovieCinemaTimes);
 
 const getMovieSchedule= 'GET-MOVIE-SCHEDULE';
 export const getMovieScheduleAction = genericAction(getMovieSchedule);
+////Hall Chairs
+const getHallChairs='GET-Hall-Chairs';
+export const getHallChairsAction=genericAction(getHallChairs);
+

@@ -1,41 +1,51 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import {Link} from 'react-router-dom';
+import { getMovieCinemaTimes } from "../../Axios/get-movie-cinema-times";
 import { useSelect } from "../../helper";
-import { IMovie } from "../../models";
+import { ICinema, IMovie, ITimeItem } from "../../models";
+import { getMovieCinemaTimesRequested } from "../../React-Redux/Actions/get-movie-cinema-times-action";
+
 import { getMovieCinemasRequested } from "../../React-Redux/Actions/get-movie-cinemas-action";
 import { getMovieScheduleRequested } from "../../React-Redux/Actions/get-movie-schedule";
 import { getMoviesRequested } from "../../React-Redux/Actions/get-movies-action";
+import CinemaUi from "./CinemaUI";
 import './RadioStyle.css';
 
 const CinemaTimes:React.FC = (props:any) => {
- // console.log("cid",props.match.params.cid,"shid",props.match.params.shid)
-    const [movie,setMovie] = useState<IMovie>();
     const id=props.match.params.id;
     const dispatch=useDispatch();
-    const {cinemas}=useSelect(state=>state.movieCinemasReducer);
+    const [movie,setMovie] = useState<IMovie>();
+    const [alltimes,setAllTimes]=useState<any>();
+    const [dates,setDstes]=useState<any>();
     const {movies}=useSelect(state=>state.moviesReducer);
+    
+    const {cinemas}=useSelect(state=>state.movieCinemasReducer);
+   
     const {movieSchedule}=useSelect(state=>state.movieScheduleReducer);
+    const {times}=useSelect(state=>state.movieCinemaTimesReducer);
+
+
     useEffect(() => {
         dispatch(getMovieCinemasRequested({id:id}));
         dispatch(getMoviesRequested());
+       // dispatch(getMovieCinemaTimesRequested({ip:"62.193.99.221",showName:"Dune"}))
     }, []);
     useEffect(() => {
-        const selectedMovie = movies.filter(movi => movi.ShowId === id)[0];
-        console.log("========================>", selectedMovie,movies );
-
-        setMovie(selectedMovie)  ;
+        const selectedMovie = movies.find(movi => movi.ShowId === id);
+         setMovie(selectedMovie)  ;
         if(selectedMovie){
-            console.log("========================>", selectedMovie.ShowNam );
-
             dispatch(getMovieScheduleRequested({showName:selectedMovie.ShowNam}))
 
         }
     
     }, [movies]);
     useEffect(() => {
-        console.log("========================>", movieSchedule );
-
-    }, [movieSchedule]);
+      console.log(cinemas)
+    
+    }, [cinemas]);
+  
+ 
  
     return(
         <>
@@ -77,47 +87,11 @@ const CinemaTimes:React.FC = (props:any) => {
                     <div className="row justify-content-center">
                         <div className="col-lg-12 mb-12 mb-lg-12">
                             <ul className="seat-plan-wrapper bg-five">
-                                <li style={{'display':'flex', 'alignItems':'center'}}>
-                                    <div className="movie-name">
-                                        <div className="icons">
-                                            <i className="far fa-heart"></i>
-                                            <i className="fas fa-heart"></i>
-                                        </div>
-                                        <a href="#0" className="name">Genesis Cinema</a>
-                                        <div className="location-icon">
-                                            <i className="fas fa-map-marker-alt"></i>
-                                        </div>
-                                    </div>
-                                    <div className="movie-schedule middle">
-                                        <div className="item">
-                                            09:40
-                                        </div>
-                                        <div className="item">
-                                            13:45
-                                        </div>
-                                        <div className="item">
-                                            15:45
-                                        </div>
-                                        <div className="item">
-                                            19:50
-                                        </div>
-                                    </div>
-                                    <div className="movie-schedule">
-                                        <div className="item">
-                                            09:40
-                                        </div>
-                                        <div className="item">
-                                            13:45
-                                        </div>
-                                        <div className="item">
-                                            15:45
-                                        </div>
-                                        <div className="item">
-                                            19:50
-                                        </div>
-                                    </div>
-                                </li>                        
-                                
+                            {
+                                cinemas.map((c:ICinema)=><CinemaUi  cinema={c} />
+
+                                )
+                            }
                             </ul>
                         </div>
                     
@@ -130,8 +104,6 @@ const CinemaTimes:React.FC = (props:any) => {
 
  
 export default CinemaTimes;
-
-
 {/* <div classNameName="radio-toolbar ">
 {dates.map((item,i) => (
   <React.Fragment>
@@ -148,4 +120,4 @@ export default CinemaTimes;
     <label htmlFor={`radio${i}`}> {item.date}</label>
   </React.Fragment>
 ))}
-</div> */}
+</div> */} 

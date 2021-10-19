@@ -1,7 +1,7 @@
 
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import React from "react";
+import React ,{useEffect}from "react";
 import Home from './Components/Home/Home';
 import Nav from "./Components/Navbar/Navbar";
 import Footer from './Components/Footer/Footer';
@@ -14,13 +14,30 @@ import configureStore from './React-Redux/store';
 import {UAParser} from 'ua-parser-js';
 //import './Styles/NotFound.css';
 import 'react-multi-carousel/lib/styles.css';
-import CinemaTimes from "./Components/Booking-With-Cinema/CinemaTimes";
+import CinemaTimes from "./Components/Booking-With-Cinema/CinemaTimes.tsx";
+import SignUp from "./Components/Sign up/sign-up";
+import SignIn from "./Components/Sign up/sigin-in";
+import SelectChair from "./Components/Booking-With-Cinema/select-chair";
+import { useDispatch } from "react-redux";
+import { useSelect } from "./helper";
+import { getHallChairsRequested } from "./React-Redux/Actions/get-hall-chairs-action";
+import ContactUs from "./Components/Contact Us/ContactUs";
+import { getMovieCinemaTimesRequested } from "./React-Redux/Actions/get-movie-cinema-times-action";
 
 const store = configureStore();
 
 function App() {
   
+// const dispatch=useDispatch();
+// const selector=useSelect(state=>state.movieCinemaTimesReducer)
+// useEffect(()=>{
+//   dispatch(getMovieCinemaTimesRequested({ip:"62.193.99.221",showName:"Dune"}))
 
+// },[])
+// useEffect(()=>{
+//   console.log(selector)
+
+// },[selector])
 
 
   return (
@@ -80,6 +97,35 @@ function App() {
                       path="/cinema-times/:cid/:shid"
                       exact
                     />
+                    <Route
+                      component={(props) => (
+                        <SignUp {...props} />
+                      )}
+                      path="/sign-up"
+                      exact
+                    />
+                    <Route
+                    component={(props) => (
+                      <SignIn {...props} />
+                    )}
+                    path="/sign-in"
+                    exact
+                  />
+                  <Route
+                  component={(props) => (
+                    <SelectChair {...props} />
+                  )}
+                  path="/select-chair"
+                  exact
+                />
+                <Route
+                component={(props) => (
+                  <ContactUs {...props} />
+                )}
+                path="/contact-us"
+                exact
+              />
+                   
           </Switch>
 
           <Route render={(props) => <Footer {...props} />} />

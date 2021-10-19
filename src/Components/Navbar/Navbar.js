@@ -7,7 +7,7 @@ function Nav(props)  {
 
     return (
       <React.Fragment>
-        <header className="header-section">
+        <header className="header-section" style={{marginBottom:"50px"}}>
           <div className="container">
             <div className="header-wrapper">
               <div className="logo">
@@ -40,10 +40,10 @@ function Nav(props)  {
                 </li>
 
                 <li>
-                  <a href="contact.html">contact</a>
+                  <Link to="/contact-us">contact</Link>
                 </li>
                 <li className="header-button pr-0">
-                  <a href="sign-up.html">join us</a>
+                  <Link to="/sign-up">join us</Link>
                 </li>
               </ul>
               <div className="header-bar d-lg-none">
