@@ -26,12 +26,32 @@ export interface ITime{
     rowsNo: string
       
 }
+
+export interface ITimeItem{
+    hallid: string;
+    ShowTimeCod: string;
+    ShowTimeName: string;
+    timein: string;
+    colsNo: string;
+    rowsNo: string
+      
+}
 interface AxiosResponse{
     data?:any;
 }
 export interface ICinema{
-    CinemaId: string,
+    CinemaId?: string;
     CinemaNamA: string,
     CinemaNamE: string,
-    IpAdress:string
+    IpAdress:string,
+    location:string
+}
+export interface IChair{
+    ChairId?: string;
+    RowNo: string;
+    ColNo: string;
+    ChairColTitle: string;
+    ChairRowTitle: string;
+    ChairPrice: string;
+    ChairStatCod: string
 }

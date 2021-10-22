@@ -12,9 +12,9 @@ function* getMovieCinemaTimesSaga(action:typeof actionType.actions) {
 
     try {
         const payload = action.payload;
-        console.log(payload)
+       // console.log(payload)
         const res : AxiosResponse= yield call(getMovieCinemaTimes,payload.ip,payload.showName);
-        console.log("saga times",res.data)
+      //  console.log("saga times",res.data)
         
         yield put(getMovieCinemaTimesSucceeded(res.data.GetShowTimesByShowNameResult));
     } catch (e) {

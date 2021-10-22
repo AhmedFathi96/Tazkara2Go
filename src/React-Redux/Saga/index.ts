@@ -6,6 +6,7 @@ import { watchGetMovieCinemasSaga } from "./get-movie-cinemas-saga";
 import { watchGetMovieCinemaTimesSaga } from "./get-movie-cinema-times-saga";
 import { watchGetCinemaMoviesSaga } from "./get-cinema-movies-saga";
 import { watchGetMovieScheduleSaga } from "./get-movie-schedule-saga";
+import { watchGetHallChairsSaga } from "./get-hall-chairs-saga";
 export default function* rootSaga() {
     yield all([
         watchGetMoviesSaga(),
@@ -14,6 +15,7 @@ export default function* rootSaga() {
         watchGetMovieCinemasSaga(),
         watchGetMovieCinemaTimesSaga(),
         watchGetCinemaMoviesSaga(),
-        watchGetMovieScheduleSaga()
+        watchGetMovieScheduleSaga(),
+        watchGetHallChairsSaga()
     ])}
     
