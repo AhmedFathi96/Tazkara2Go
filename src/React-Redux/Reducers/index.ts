@@ -5,6 +5,9 @@ import { movieWorkersReducer } from './movie-workers-reducer';
 import { movieCinemaTimesReducer } from './movie-cinema-times-reducer';
 import { movieCinemasReducer } from './movie-cinemas-reducer';
 import { movieScheduleReducer } from './movie-schedule-reducer';
+import { unAvailableChairsReducer } from './unAvailable-chairs-reducer';
+import {holdChairReducer } from './hold-chair-reducer';
+import {unholdChairReducer } from './unhold-chair-reducer';
 
 import { hallChairsReducer } from './hall-chairs-reducer';
 export const rootReducer = combineReducers({
@@ -14,7 +17,10 @@ export const rootReducer = combineReducers({
     movieCinemaTimesReducer,
     cinemasReducer,
     movieScheduleReducer,
-    hallChairsReducer
+    hallChairsReducer,
+    unAvailableChairsReducer,
+    holdChairReducer,
+    unholdChairReducer
 });
 type rootReducer = typeof rootReducer;
 

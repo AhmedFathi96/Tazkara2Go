@@ -1,3 +1,5 @@
+import { getUnAvialableChairsUrl } from "../../Axios/urls";
+
 export const genericAction = (action:string) => ({
     fulfilled: `${action}_FULFILLED`,
     rejected: `${action}_REJECTED`,
@@ -27,4 +29,16 @@ export const getMovieScheduleAction = genericAction(getMovieSchedule);
 ////Hall Chairs
 const getHallChairs='GET-Hall-Chairs';
 export const getHallChairsAction=genericAction(getHallChairs);
+////hold chair
+const holdChair='Hold-Chair';
+export const holdChairAction=genericAction(holdChair);
+////unhold chair
+const unholdChair='Unhold-Chair';
+export const unholdChairAction=genericAction(unholdChair);
+////unAvailable chairs
+const getUnAvialableChairs='GET-UnAvailable-Chairs';
+export const getUnAvialableChairsAction=genericAction(getUnAvialableChairs);
+////unhold chairs
+const unholdChairs='Unhold-Chairs';
+export const unholdChairsAction=genericAction(unholdChairs);
 

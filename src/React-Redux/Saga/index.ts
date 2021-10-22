@@ -7,6 +7,11 @@ import { watchGetMovieCinemaTimesSaga } from "./get-movie-cinema-times-saga";
 import { watchGetCinemaMoviesSaga } from "./get-cinema-movies-saga";
 import { watchGetMovieScheduleSaga } from "./get-movie-schedule-saga";
 import { watchGetHallChairsSaga } from "./get-hall-chairs-saga";
+import { watchGetUnAvailableChairsSaga } from "./get-unAvailable-chairs-saga";
+import { watchHoldChairSaga} from "./hold-chair-saga";
+import { watchUnHoldChairSaga } from "./unhold-chair-saga";
+import { watchUnHoldChairsSaga } from "./unhold-chairs-saga";
+
 export default function* rootSaga() {
     yield all([
         watchGetMoviesSaga(),
@@ -16,6 +21,11 @@ export default function* rootSaga() {
         watchGetMovieCinemaTimesSaga(),
         watchGetCinemaMoviesSaga(),
         watchGetMovieScheduleSaga(),
-        watchGetHallChairsSaga()
+        watchGetHallChairsSaga(),
+        watchGetUnAvailableChairsSaga (),
+        watchHoldChairSaga(),
+        watchUnHoldChairSaga(),
+        watchUnHoldChairsSaga()
+
     ])}
     
