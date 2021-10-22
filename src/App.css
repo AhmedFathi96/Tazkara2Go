@@ -172,3 +172,7 @@
 .section-header-2 a{
   color: #fff;
 }
+
+.selected{
+  background: #31d7a9 !important;
+}

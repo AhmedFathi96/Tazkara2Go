@@ -9,7 +9,7 @@ const SelectChair: React.FC = (props:any) => {
       <div className="screen-area">
         <h4 className="screen">screen</h4>
         <div className="screen-thumb">
-          <img src="./assets/images/movie/screen-thumb.png" alt="movie" />
+          <img src="../../../assets/images/movie/screen-thumb.png" alt="movie" />
         </div>
         
         <div className="screen-wrapper">
@@ -20,54 +20,54 @@ const SelectChair: React.FC = (props:any) => {
                 <li className="front-seat">
                   <ul>
                     <li className="single-seat">
-                      <img src="./assets/images/movie/seat01.png" alt="seat" />
+                      <img src="../../.../../../assets/images/movie/seat01.png" alt="seat" />
                     </li>
                     <li className="single-seat">
-                      <img src="./assets/images/movie/seat01.png" alt="seat" />
+                      <img src="../../../assets/images/movie/seat01.png" alt="seat" />
                     </li>
                     <li className="single-seat">
-                      <img src="./assets/images/movie/seat01.png" alt="seat" />
+                      <img src="../../../assets/images/movie/seat01.png" alt="seat" />
                     </li>
                     <li className="single-seat">
-                      <img src="./assets/images/movie/seat01.png" alt="seat" />
-                    </li>
-                  </ul>
-                </li>
-                <li className="front-seat">
-                  <ul>
-                    <li className="single-seat">
-                      <img src="./assets/images/movie/seat01.png" alt="seat" />
-                    </li>
-                    <li className="single-seat">
-                      <img src="./assets/images/movie/seat01.png" alt="seat" />
-                    </li>
-                    <li className="single-seat">
-                      <img src="./assets/images/movie/seat01.png" alt="seat" />
-                    </li>
-                    <li className="single-seat">
-                      <img src="./assets/images/movie/seat01.png" alt="seat" />
-                    </li>
-                    <li className="single-seat">
-                      <img src="./assets/images/movie/seat01.png" alt="seat" />
-                    </li>
-                    <li className="single-seat">
-                      <img src="./assets/images/movie/seat01.png" alt="seat" />
+                      <img src="../../../assets/images/movie/seat01.png" alt="seat" />
                     </li>
                   </ul>
                 </li>
                 <li className="front-seat">
                   <ul>
                     <li className="single-seat">
-                      <img src="./assets/images/movie/seat01.png" alt="seat" />
+                      <img src="../../../assets/images/movie/seat01.png" alt="seat" />
                     </li>
                     <li className="single-seat">
-                      <img src="./assets/images/movie/seat01.png" alt="seat" />
+                      <img src="../../../assets/images/movie/seat01.png" alt="seat" />
                     </li>
                     <li className="single-seat">
-                      <img src="./assets/images/movie/seat01.png" alt="seat" />
+                      <img src="../../../assets/images/movie/seat01.png" alt="seat" />
                     </li>
                     <li className="single-seat">
-                      <img src="./assets/images/movie/seat01.png" alt="seat" />
+                      <img src="../../../assets/images/movie/seat01.png" alt="seat" />
+                    </li>
+                    <li className="single-seat">
+                      <img src="../../../assets/images/movie/seat01.png" alt="seat" />
+                    </li>
+                    <li className="single-seat">
+                      <img src="../../../assets/images/movie/seat01.png" alt="seat" />
+                    </li>
+                  </ul>
+                </li>
+                <li className="front-seat">
+                  <ul>
+                    <li className="single-seat">
+                      <img src="../../../assets/images/movie/seat01.png" alt="seat" />
+                    </li>
+                    <li className="single-seat">
+                      <img src="../../../assets/images/movie/seat01.png" alt="seat" />
+                    </li>
+                    <li className="single-seat">
+                      <img src="../../../assets/images/movie/seat01.png" alt="seat" />
+                    </li>
+                    <li className="single-seat">
+                      <img src="../../../assets/images/movie/seat01.png" alt="seat" />
                     </li>
                   </ul>
                 </li>
@@ -80,46 +80,46 @@ const SelectChair: React.FC = (props:any) => {
                 <li className="front-seat">
                   <ul>
                     <li className="single-seat">
-                      <img src="./assets/images/movie/seat01.png" alt="seat" />
+                      <img src="../../../assets/images/movie/seat01.png" alt="seat" />
                     </li>
                     <li className="single-seat">
-                      <img src="./assets/images/movie/seat01.png" alt="seat" />
+                      <img src="../../../assets/images/movie/seat01.png" alt="seat" />
                     </li>
                     <li className="single-seat">
-                      <img src="./assets/images/movie/seat01.png" alt="seat" />
+                      <img src="../../../assets/images/movie/seat01.png" alt="seat" />
                     </li>
                     <li className="single-seat">
-                      <img src="./assets/images/movie/seat01.png" alt="seat" />
+                      <img src="../../../assets/images/movie/seat01.png" alt="seat" />
                     </li>
                   </ul>
                 </li>
                 <li className="front-seat">
                   <ul>
                     <li className="single-seat">
-                      <img src="./assets/images/movie/seat01.png" alt="seat" />
+                      <img src="../../../assets/images/movie/seat01.png" alt="seat" />
                     </li>
                     <li className="single-seat seat-free">
                       <img
-                        src="./assets/images/movie/seat01-free.png"
+                        src="../../../assets/images/movie/seat01-free.png"
                         alt="seat"
                       />
                       <span className="sit-num">f7</span>
                     </li>
                     <li className="single-seat seat-free">
                       <img
-                        src="./assets/images/movie/seat01-free.png"
+                        src="../../../assets/images/movie/seat01-free.png"
                         alt="seat"
                       />
                       <span className="sit-num">f8</span>
                     </li>
                     <li className="single-seat">
-                      <img src="./assets/images/movie/seat01.png" alt="seat" />
+                      <img src="../../../assets/images/movie/seat01.png" alt="seat" />
                     </li>
                     <li className="single-seat">
-                      <img src="./assets/images/movie/seat01.png" alt="seat" />
+                      <img src="../../../assets/images/movie/seat01.png" alt="seat" />
                     </li>
                     <li className="single-seat">
-                      <img src="./assets/images/movie/seat01.png" alt="seat" />
+                      <img src="../../../assets/images/movie/seat01.png" alt="seat" />
                     </li>
                   </ul>
                 </li>
@@ -127,27 +127,27 @@ const SelectChair: React.FC = (props:any) => {
                   <ul>
                     <li className="single-seat seat-free">
                       <img
-                        src="./assets/images/movie/seat01-free.png"
+                        src="../../../assets/images/movie/seat01-free.png"
                         alt="seat"
                       />
                       <span className="sit-num">f9</span>
                     </li>
                     <li className="single-seat seat-free">
                       <img
-                        src="./assets/images/movie/seat01-free.png"
+                        src="../../../assets/images/movie/seat01-free.png"
                         alt="seat"
                       />
                       <span className="sit-num">f10</span>
                     </li>
                     <li className="single-seat seat-free">
                       <img
-                        src="./assets/images/movie/seat01-free.png"
+                        src="../../../assets/images/movie/seat01-free.png"
                         alt="seat"
                       />
                       <span className="sit-num">f11</span>
                     </li>
                     <li className="single-seat">
-                      <img src="./assets/images/movie/seat01.png" alt="seat" />
+                      <img src="../../../assets/images/movie/seat01.png" alt="seat" />
                     </li>
                   </ul>
                 </li>
@@ -165,33 +165,33 @@ const SelectChair: React.FC = (props:any) => {
                 <li className="front-seat">
                   <ul>
                     <li className="single-seat">
-                      <img src="./assets/images/movie/seat02.png" alt="seat" />
+                      <img src="../../../assets/images/movie/seat02.png" alt="seat" />
                     </li>
                     <li className="single-seat">
-                      <img src="./assets/images/movie/seat02.png" alt="seat" />
-                    </li>
-                  </ul>
-                </li>
-                <li className="front-seat">
-                  <ul>
-                    <li className="single-seat">
-                      <img src="./assets/images/movie/seat02.png" alt="seat" />
-                    </li>
-                    <li className="single-seat">
-                      <img src="./assets/images/movie/seat02.png" alt="seat" />
-                    </li>
-                    <li className="single-seat">
-                      <img src="./assets/images/movie/seat02.png" alt="seat" />
+                      <img src="../../../assets/images/movie/seat02.png" alt="seat" />
                     </li>
                   </ul>
                 </li>
                 <li className="front-seat">
                   <ul>
                     <li className="single-seat">
-                      <img src="./assets/images/movie/seat02.png" alt="seat" />
+                      <img src="../../../assets/images/movie/seat02.png" alt="seat" />
                     </li>
                     <li className="single-seat">
-                      <img src="./assets/images/movie/seat02.png" alt="seat" />
+                      <img src="../../../assets/images/movie/seat02.png" alt="seat" />
+                    </li>
+                    <li className="single-seat">
+                      <img src="../../../assets/images/movie/seat02.png" alt="seat" />
+                    </li>
+                  </ul>
+                </li>
+                <li className="front-seat">
+                  <ul>
+                    <li className="single-seat">
+                      <img src="../../../assets/images/movie/seat02.png" alt="seat" />
+                    </li>
+                    <li className="single-seat">
+                      <img src="../../../assets/images/movie/seat02.png" alt="seat" />
                     </li>
                   </ul>
                 </li>
@@ -204,37 +204,37 @@ const SelectChair: React.FC = (props:any) => {
                 <li className="front-seat">
                   <ul>
                     <li className="single-seat">
-                      <img src="./assets/images/movie/seat02.png" alt="seat" />
+                      <img src="../../../assets/images/movie/seat02.png" alt="seat" />
                     </li>
                     <li className="single-seat">
-                      <img src="./assets/images/movie/seat02.png" alt="seat" />
+                      <img src="../../../assets/images/movie/seat02.png" alt="seat" />
                     </li>
                   </ul>
                 </li>
                 <li className="front-seat">
                   <ul>
                     <li className="single-seat">
-                      <img src="./assets/images/movie/seat02.png" alt="seat" />
+                      <img src="../../../assets/images/movie/seat02.png" alt="seat" />
                     </li>
                     <li className="single-seat seat-free-two">
                       <img
-                        src="./assets/images/movie/seat02-booked.png"
+                        src="../../../assets/images/movie/seat02-booked.png"
                         alt="seat"
                       />
                       <span className="sit-num">D7 D8</span>
                     </li>
                     <li className="single-seat">
-                      <img src="./assets/images/movie/seat02.png" alt="seat" />
+                      <img src="../../../assets/images/movie/seat02.png" alt="seat" />
                     </li>
                   </ul>
                 </li>
                 <li className="front-seat">
                   <ul>
                     <li className="single-seat">
-                      <img src="./assets/images/movie/seat02.png" alt="seat" />
+                      <img src="../../../assets/images/movie/seat02.png" alt="seat" />
                     </li>
                     <li className="single-seat">
-                      <img src="./assets/images/movie/seat02.png" alt="seat" />
+                      <img src="../../../assets/images/movie/seat02.png" alt="seat" />
                     </li>
                   </ul>
                 </li>
@@ -247,23 +247,23 @@ const SelectChair: React.FC = (props:any) => {
                 <li className="front-seat">
                   <ul>
                     <li className="single-seat">
-                      <img src="./assets/images/movie/seat02.png" alt="seat" />
+                      <img src="../../../assets/images/movie/seat02.png" alt="seat" />
                     </li>
                     <li className="single-seat">
-                      <img src="./assets/images/movie/seat02.png" alt="seat" />
+                      <img src="../../../assets/images/movie/seat02.png" alt="seat" />
                     </li>
                   </ul>
                 </li>
                 <li className="front-seat">
                   <ul>
                     <li className="single-seat">
-                      <img src="./assets/images/movie/seat02.png" alt="seat" />
+                      <img src="../../../assets/images/movie/seat02.png" alt="seat" />
                     </li>
                     <li className="single-seat">
-                      <img src="./assets/images/movie/seat02.png" alt="seat" />
+                      <img src="../../../assets/images/movie/seat02.png" alt="seat" />
                     </li>
                     <li className="single-seat">
-                      <img src="./assets/images/movie/seat02.png" alt="seat" />
+                      <img src="../../../assets/images/movie/seat02.png" alt="seat" />
                     </li>
                   </ul>
                 </li>
@@ -271,13 +271,13 @@ const SelectChair: React.FC = (props:any) => {
                   <ul>
                     <li className="single-seat seat-free-two">
                       <img
-                        src="./assets/images/movie/seat02-free.png"
+                        src="../../../assets/images/movie/seat02-free.png"
                         alt="seat"
                       />
                       <span className="sit-num">f11 f12</span>
                     </li>
                     <li className="single-seat">
-                      <img src="./assets/images/movie/seat02.png" alt="seat" />
+                      <img src="../../../assets/images/movie/seat02.png" alt="seat" />
                     </li>
                   </ul>
                 </li>
@@ -290,37 +290,37 @@ const SelectChair: React.FC = (props:any) => {
                 <li className="front-seat">
                   <ul>
                     <li className="single-seat">
-                      <img src="./assets/images/movie/seat02.png" alt="seat" />
+                      <img src="../../../assets/images/movie/seat02.png" alt="seat" />
                     </li>
                     <li className="single-seat">
-                      <img src="./assets/images/movie/seat02.png" alt="seat" />
+                      <img src="../../../assets/images/movie/seat02.png" alt="seat" />
                     </li>
                   </ul>
                 </li>
                 <li className="front-seat">
                   <ul>
                     <li className="single-seat">
-                      <img src="./assets/images/movie/seat02.png" alt="seat" />
+                      <img src="../../../assets/images/movie/seat02.png" alt="seat" />
                     </li>
                     <li className="single-seat seat-free-two">
                       <img
-                        src="./assets/images/movie/seat02-free.png"
+                        src="../../../assets/images/movie/seat02-free.png"
                         alt="seat"
                       />
                       <span className="sit-num">b7 b8</span>
                     </li>
                     <li className="single-seat">
-                      <img src="./assets/images/movie/seat02.png" alt="seat" />
+                      <img src="../../../assets/images/movie/seat02.png" alt="seat" />
                     </li>
                   </ul>
                 </li>
                 <li className="front-seat">
                   <ul>
                     <li className="single-seat">
-                      <img src="./assets/images/movie/seat02.png" alt="seat" />
+                      <img src="../../../assets/images/movie/seat02.png" alt="seat" />
                     </li>
                     <li className="single-seat">
-                      <img src="./assets/images/movie/seat02.png" alt="seat" />
+                      <img src="../../../assets/images/movie/seat02.png" alt="seat" />
                     </li>
                   </ul>
                 </li>
@@ -334,14 +334,14 @@ const SelectChair: React.FC = (props:any) => {
                   <ul>
                     <li className="single-seat seat-free-two">
                       <img
-                        src="./assets/images/movie/seat02-free.png"
+                        src="../../../assets/images/movie/seat02-free.png"
                         alt="seat"
                       />
                       <span className="sit-num">a1 a2</span>
                     </li>
                     <li className="single-seat seat-free-two">
                       <img
-                        src="./assets/images/movie/seat02-free.png"
+                        src="../../../assets/images/movie/seat02-free.png"
                         alt="seat"
                       />
                       <span className="sit-num">a3 a4</span>
@@ -352,21 +352,21 @@ const SelectChair: React.FC = (props:any) => {
                   <ul>
                     <li className="single-seat seat-free-two">
                       <img
-                        src="./assets/images/movie/seat02-free.png"
+                        src="../../../assets/images/movie/seat02-free.png"
                         alt="seat"
                       />
                       <span className="sit-num">a5 a6</span>
                     </li>
                     <li className="single-seat seat-free-two">
                       <img
-                        src="./assets/images/movie/seat02-free.png"
+                        src="../../../assets/images/movie/seat02-free.png"
                         alt="seat"
                       />
                       <span className="sit-num">a7 a8</span>
                     </li>
                     <li className="single-seat seat-free-two">
                       <img
-                        src="./assets/images/movie/seat02-free.png"
+                        src="../../../assets/images/movie/seat02-free.png"
                         alt="seat"
                       />
                       <span className="sit-num">a9 a10</span>
@@ -377,14 +377,14 @@ const SelectChair: React.FC = (props:any) => {
                   <ul>
                     <li className="single-seat seat-free-two">
                       <img
-                        src="./assets/images/movie/seat02-free.png"
+                        src="../../../assets/images/movie/seat02-free.png"
                         alt="seat"
                       />
                       <span className="sit-num">a11</span>
                     </li>
                     <li className="single-seat seat-free-two">
                       <img
-                        src="./assets/images/movie/seat02-free.png"
+                        src="../../../assets/images/movie/seat02-free.png"
                         alt="seat"
                       />
                       <span className="sit-num">a12</span>
@@ -399,7 +399,7 @@ const SelectChair: React.FC = (props:any) => {
       </div>
       <div
         className="proceed-book bg_img"
-        data-background="./assets/images/movie/movie-bg-proceed.jpg"
+        data-background="../../../assets/images/movie/movie-bg-proceed.jpg"
       >
         <div className="proceed-to-book">
           <div className="book-item">

@@ -23,7 +23,7 @@ function* getMovieScheduleSaga(action:typeof actionType.actions) {
                 const res:AxiosResponse =  yield call(getMovieCinemaTimes,cinemas.data.GetCinemasResult[i].IpAdress,payload.showName);
                 if(res.data.GetShowTimesByShowNameResult.length > 0){
                     //console.log("data 2 ==========================>",res.data.GetShowTimesByShowNameResult)
-                    data.push(res.data.GetShowTimesByShowNameResult)
+                    data.push({cinema: cinemas.data.GetCinemasResult[i], shows:res.data.GetShowTimesByShowNameResult})
                 }
             }
         }

@@ -32,8 +32,6 @@ export interface ITimeItem{
     ShowTimeCod: string;
     ShowTimeName: string;
     timein: string;
-    
-    
     colsNo: string;
     rowsNo: string
       

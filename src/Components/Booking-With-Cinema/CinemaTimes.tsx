@@ -104,20 +104,3 @@ const CinemaTimes:React.FC = (props:any) => {
 
  
 export default CinemaTimes;
-{/* <div classNameName="radio-toolbar ">
-{dates.map((item,i) => (
-  <React.Fragment>
-    
-    <input
-      name="lastName"
-      key={i}
-      id={`radio${i}`}
-      value={item.date}
-      type="radio"
-      onChange={(e)=>setTimes(e.target.value)}
-      
-    />
-    <label htmlFor={`radio${i}`}> {item.date}</label>
-  </React.Fragment>
-))}
-</div> */} 

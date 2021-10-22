@@ -115,7 +115,7 @@ function App() {
                   component={(props) => (
                     <SelectChair {...props} />
                   )}
-                  path="/select-chair"
+                  path="/select-chair/:cinemaIP/:showTimeCode/:hallId"
                   exact
                 />
                 <Route

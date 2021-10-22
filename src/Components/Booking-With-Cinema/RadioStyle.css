@@ -8,7 +8,7 @@
     width: 0;
   }
   
-  .radio-toolbar label {
+  /* .radio-toolbar label {
       display: inline-block;
       background-color: #162f5f;
       padding: 10px 20px;
@@ -19,7 +19,7 @@
       color: white;
       margin: 5px;
   }
-  
+   */
   .radio-toolbar label:hover {
     background-color: #31d7a9;
   }
