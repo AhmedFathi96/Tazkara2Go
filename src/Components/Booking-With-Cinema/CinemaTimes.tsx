@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import {Link} from 'react-router-dom';
-import { getMovieCinemaTimes } from "../../Axios/get-movie-cinema-times";
 import { useSelect } from "../../helper";
-import { ICinema, IMovie, ITimeItem } from "../../models";
-import { getMovieCinemaTimesRequested } from "../../React-Redux/Actions/get-movie-cinema-times-action";
+import { ICinema, IMovie } from "../../models";
+
 
 import { getMovieCinemasRequested } from "../../React-Redux/Actions/get-movie-cinemas-action";
 import { getMovieScheduleRequested } from "../../React-Redux/Actions/get-movie-schedule";
@@ -16,14 +15,11 @@ const CinemaTimes:React.FC = (props:any) => {
     const id=props.match.params.id;
     const dispatch=useDispatch();
     const [movie,setMovie] = useState<IMovie>();
-    const [alltimes,setAllTimes]=useState<any>();
-    const [dates,setDstes]=useState<any>();
+
     const {movies}=useSelect(state=>state.moviesReducer);
     
     const {cinemas}=useSelect(state=>state.movieCinemasReducer);
-   
-    const {movieSchedule}=useSelect(state=>state.movieScheduleReducer);
-    const {times}=useSelect(state=>state.movieCinemaTimesReducer);
+
 
 
     useEffect(() => {
@@ -33,20 +29,17 @@ const CinemaTimes:React.FC = (props:any) => {
     }, []);
     useEffect(() => {
         const selectedMovie = movies.find(movi => movi.ShowId === id);
-         setMovie(selectedMovie)  ;
+            setMovie(selectedMovie)  ;
         if(selectedMovie){
             dispatch(getMovieScheduleRequested({showName:selectedMovie.ShowNam}))
 
         }
     
-    }, [movies]);
+    }, [movies,cinemas]);
+
     useEffect(() => {
-      console.log(cinemas)
-    
-    }, [cinemas]);
-  
- 
- 
+        console.log("movie , cinemas ===================>",movie,cinemas)
+    }, [movies,cinemas]);
     return(
         <>
         
@@ -87,8 +80,8 @@ const CinemaTimes:React.FC = (props:any) => {
                     <div className="row justify-content-center">
                         <div className="col-lg-12 mb-12 mb-lg-12">
                             <ul className="seat-plan-wrapper bg-five">
-                            {
-                                cinemas.map((c:ICinema)=><CinemaUi  cinema={c} />
+                            {   
+                                movie&&cinemas.map((c:ICinema)=><CinemaUi  cinema={c} movie={movie} />
 
                                 )
                             }

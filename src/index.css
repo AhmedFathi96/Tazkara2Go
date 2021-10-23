@@ -94,3 +94,11 @@ input[type="range"]:focus::-webkit-slider-runnable-track {
 .middle{
   border-right: 1px solid #11326f;
 }
+.seat{
+  width: 42px;
+  height: 39px;
+}
+.emptySeat{
+  width: 42px;
+  height: 39px;
+}

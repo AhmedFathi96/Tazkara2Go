@@ -47,11 +47,12 @@ export interface ICinema{
     location:string
 }
 export interface IChair{
-    ChairId?: string;
+    ChairId: string;
     RowNo: string;
     ColNo: string;
     ChairColTitle: string;
     ChairRowTitle: string;
     ChairPrice: string;
-    ChairStatCod: string
+    ChairStatCod: string;
+    selected:boolean;
 }

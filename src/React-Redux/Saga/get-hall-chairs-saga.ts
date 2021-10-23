@@ -4,6 +4,7 @@ import { getHallChairs } from "../../Axios/get-hall-chairs";
 import { getHallChairsAction } from "../Actions/index"; 
 import { getHallChairsSucceeded, getHallChairsRequested }  from '../Actions/get-hall-chairs-action';
 import { union } from "ts-action";
+import { IChair } from "../../models";
 
 
 
@@ -16,7 +17,7 @@ function* getHallChairsSaga(action:typeof actionType.actions) {
      //console.log("payload",payload)
         const res : AxiosResponse= yield call(getHallChairs,payload.CinemaIpAdress,payload.ShowTimeCod,payload.hallid);
        // console.log("saga halls chairs",res.data.GetHallChairsResult)
-        
+        const re= res.data.GetHallChairsResult.map((c:IChair)=> c.selected = false)
         yield put(getHallChairsSucceeded(res.data.GetHallChairsResult));
     } catch (e) {
         //yield put(getMoviesFailed(e));

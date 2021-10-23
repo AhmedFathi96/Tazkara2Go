@@ -18,9 +18,7 @@ import CinemaTimes from "./Components/Booking-With-Cinema/CinemaTimes.tsx";
 import SignUp from "./Components/Sign up/sign-up";
 import SignIn from "./Components/Sign up/sigin-in";
 import SelectChair from "./Components/Booking-With-Cinema/select-chair";
-import { useDispatch } from "react-redux";
-import { useSelect } from "./helper";
-import { getHallChairsRequested } from "./React-Redux/Actions/get-hall-chairs-action";
+
 import ContactUs from "./Components/Contact Us/ContactUs";
 import { getMovieCinemaTimesRequested } from "./React-Redux/Actions/get-movie-cinema-times-action";
 
@@ -115,7 +113,7 @@ function App() {
                   component={(props) => (
                     <SelectChair {...props} />
                   )}
-                  path="/select-chair/:cinemaIP/:showTimeCode/:hallId"
+                  path="/select-chair/:showName/:cinemaIP/:showDate/:showTimeCode/:hallId"
                   exact
                 />
                 <Route

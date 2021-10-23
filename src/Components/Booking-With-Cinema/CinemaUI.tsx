@@ -2,20 +2,20 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import {Link} from 'react-router-dom';
 import { useSelect } from "../../helper";
-import { ICinema} from "../../models";
+import { ICinema, IMovie} from "../../models";
 import { getMovieCinemaTimesRequested } from "../../React-Redux/Actions/get-movie-cinema-times-action";
 
 import { useHistory } from 'react-router-dom';
 
 import { getMoviesRequested } from "../../React-Redux/Actions/get-movies-action";
 import './RadioStyle.css';
-interface data{
+interface IProps{
 
     cinema:ICinema,
-
+    movie:IMovie
 
 }
-const CinemaUi=(props:data)=> {
+const CinemaUi=(props:IProps)=> {
 
     const [cinema] =useState( props.cinema);
     const dispatch=useDispatch();
@@ -32,11 +32,11 @@ const CinemaUi=(props:data)=> {
     const [selectedHallId, setSelectedHallId] = useState();
     const [selectedShowTimeCode, setSelectedShowTimeCode] = useState();
     const [selectedCinemaIp, setSelectedCinemaIp] = useState();
-
+    const [selectedShowName, setSelectedShowName] = useState();
     useEffect(() => {
         //dispatch(getMovieCinemasRequested({id:id}));
         dispatch(getMoviesRequested());
-        dispatch(getMovieCinemaTimesRequested({ip:"62.193.99.221",showName:"Dune"}))
+        dispatch(getMovieCinemaTimesRequested({ip:cinema.location,showName:props.movie.ShowNam}))
     }, []);
 
     const getShowDates = (shows:any[]) =>{
@@ -87,6 +87,7 @@ const CinemaUi=(props:data)=> {
 
 
     useEffect(() => {
+        console.log("movieSchedule===========================>",movieSchedule)
         const schedule = movieSchedule.map( sch=>{
             return{
                 cinema: sch.cinema,
@@ -125,7 +126,9 @@ const CinemaUi=(props:data)=> {
 
     useEffect(()=>{
         if(selectedShowDate&&selectedShowTime&&selectedCinema){
-            history.push(`/select-chair/${selectedCinemaIp}/${selectedShowTimeCode}/${selectedHallId}`);
+        
+            const date = new Date(selectedShowDate).getTime();
+            history.push(`/select-chair/${props.movie.ShowNam}/${selectedCinemaIp}/${date}/${selectedShowTimeCode}/${selectedHallId}`);
         }
     },[selectedShowDate, selectedShowTime , selectedCinema])
     return (
