@@ -21,6 +21,7 @@ import SelectChair from "./Components/Booking-With-Cinema/select-chair";
 
 import ContactUs from "./Components/Contact Us/ContactUs";
 import { getMovieCinemaTimesRequested } from "./React-Redux/Actions/get-movie-cinema-times-action";
+import MovieCheckout from "./Components/Payment/movie-checkout";
 
 const store = configureStore();
 
@@ -90,9 +91,9 @@ function App() {
                     />
                     <Route
                       component={(props) => (
-                        <CinemaTimes {...props} />
+                        <MovieCheckout {...props} />
                       )}
-                      path="/cinema-times/:cid/:shid"
+                      path="/movie-checkout/:showName/:cinemaIP/:showDate/:showTimeCode/:hallId"
                       exact
                     />
                     <Route

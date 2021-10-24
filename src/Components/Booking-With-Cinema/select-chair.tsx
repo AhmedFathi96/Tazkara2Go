@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { useSelect } from '../../helper';
 import { IChair } from '../../models';
 import { getHallChairsRequested } from '../../React-Redux/Actions/get-hall-chairs-action';
@@ -370,6 +371,11 @@ const SelectChair: React.FC = (props:any) => {
               </div>
             </div>
           </div>
+          </section>
+          
+          <section>
+            <Link to={`/movie-checkout/${showName}/${cinemaIP}/${showDate}/${showTimeCode}/${hallId}`}> Submit</Link>
+           
           </section>
           
         </>
