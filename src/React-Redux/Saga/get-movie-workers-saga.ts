@@ -14,12 +14,12 @@ function* getMovieWorkersSaga(action:typeof actionType.actions) {
         const payload = action.payload;
 
         const res : AxiosResponse= yield call(getMovieWorkers,payload.id);
-       // console.log("saga workers",res.data.GetWorkersByShowResult)
+       // //console.log("saga workers",res.data.GetWorkersByShowResult)
         
         yield put(getMovieWorkersSucceeded(res.data.GetWorkersByShowResult));
     } catch (e) {
         //yield put(getMoviesFailed(e));
-        console.log(e)
+        //console.log(e)
         //throw new Error("Page Not Found 404");
     } 
 }

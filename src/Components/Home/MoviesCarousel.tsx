@@ -5,7 +5,7 @@ import Carousel from 'react-multi-carousel';
 import './styles.css';
  
 const MoviesCarousel: React.FC = (props:any) => {
- //console.log(props)
+ ////console.log(props)
  const responsive = {
   desktop: {
     breakpoint: { max: 3000, min: 1024 },

@@ -10,7 +10,18 @@ import {holdChairReducer } from './hold-chair-reducer';
 import {unholdChairReducer } from './unhold-chair-reducer';
 
 import { hallChairsReducer } from './hall-chairs-reducer';
+import { PersistConfig,persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import { bookCodeReducer } from './book-code-reducer';
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const persistAuth: PersistConfig = {
+    key: "bookingKeyReducer",
+    storage,
+    blacklist: ["loadingStatus"]
+};
 export const rootReducer = combineReducers({
+    bookingKeyReducer: persistReducer(persistAuth, bookCodeReducer), 
     moviesReducer,
     movieWorkersReducer,
     movieCinemasReducer,

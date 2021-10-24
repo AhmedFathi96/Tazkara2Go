@@ -26,13 +26,12 @@ const CinemaUi=(props:IProps)=> {
     const {movieSchedule}=useSelect(state=>state.movieScheduleReducer);
 
 
-    const [selectedCinema, setSelectedCinema] = useState();
     const [selectedShowTime, setSelectedShowTime] = useState();
     const [selectedShowDate, setSelectedShowDate] = useState();
     const [selectedHallId, setSelectedHallId] = useState();
     const [selectedShowTimeCode, setSelectedShowTimeCode] = useState();
-    const [selectedCinemaIp, setSelectedCinemaIp] = useState();
-    const [selectedShowName, setSelectedShowName] = useState();
+    const [selectedCinema, setSelectedCinema] = useState<any>();
+    const [selectedTimeIn, setSelectedTimeIn] = useState();
     useEffect(() => {
         //dispatch(getMovieCinemasRequested({id:id}));
         dispatch(getMoviesRequested());
@@ -50,22 +49,25 @@ const CinemaUi=(props:IProps)=> {
                     ret.push({
                         showTime:show.ShowTimeName,
                         enddate:show.enddate,
-                        startdate: currentDate.toLocaleDateString(),
+                        startdate: currentDate.toLocaleDateString("en-US"),
                         isVip:show.isVip,
                         hallid:show.hallid,
                         ShowTimeCod:show.ShowTimeCod,
-                        inBetween:getDaysArray(currentDate,endDate).map((d:any)=>d.toLocaleDateString())
+                        timein:show.timein,
+                        inBetween:getDaysArray(currentDate,endDate).map((d:any)=>d.toLocaleDateString("en-US"))
                     })
-                    console.log("=====================>",getDaysArray(currentDate,endDate).map((d:any)=>d.toLocaleDateString()))
+                    //console.log("=====================>",getDaysArray(currentDate,endDate).map((d:any)=>d.toLocaleDateString("en-US")))
                 }else{
                     ret.push({
                         showTime:show.ShowTimeName,
                         enddate:show.enddate,
-                        startdate: show.startdate,
                         isVip:show.isVip,
-                        inBetween:getDaysArray(startDate,endDate).map((d:any)=>d.toLocaleDateString())
+                        hallid:show.hallid,
+                        ShowTimeCod:show.ShowTimeCod,
+                        timein:show.timein,
+                        inBetween:getDaysArray(startDate,endDate).map((d:any)=>d.toLocaleDateString("en-US"))
                     })
-                    console.log("=====================>",getDaysArray(startDate,endDate).map((d:any)=>d.toLocaleDateString()))
+                    //console.log("=====================>",getDaysArray(startDate,endDate).map((d:any)=>d.toLocaleDateString("en-US")))
 
                 }
                 
@@ -80,14 +82,15 @@ const CinemaUi=(props:IProps)=> {
         let a:any[] = [];
         let d;
         for(a=[],d=new Date(s);d<=e;d.setDate(d.getDate()+1)){
-            a.push(new Date(d.toLocaleDateString()));
+            //console.log("toLocaleDateString==================>",d.toLocaleDateString("en-US"))
+            a.push(new Date(d.toLocaleDateString("en-US")));
         }
         return a;
     };
 
 
     useEffect(() => {
-        console.log("movieSchedule===========================>",movieSchedule)
+        //console.log("movieSchedule===========================>",movieSchedule)
         const schedule = movieSchedule.map( sch=>{
             return{
                 cinema: sch.cinema,
@@ -100,7 +103,7 @@ const CinemaUi=(props:IProps)=> {
 
         }
 
-        console.log("schedule ========================>", schedule);
+        //console.log("schedule ========================>", schedule);
 
 
     }, [movieSchedule]);
@@ -108,27 +111,39 @@ const CinemaUi=(props:IProps)=> {
         shows.forEach((sh:any) => {
             if(sh.cinema.CinemaNamA === currentShow.cinema.CinemaNamA ){
                 const d = sh.times.filter((ti:any) => ti.showTime === time)[0]
-                console.log("d ==========================>",d);
+                //console.log("d ==========================>",d);
                 setSelectedHallId(d.hallid);
                 setShowDate(d.inBetween);
                 setSelectedShowTimeCode(d.ShowTimeCod);
+                setSelectedTimeIn(d.timein)
             }
         });
         setSelectedCinema(currentShow.cinema.CinemaNamA);
-        setSelectedCinemaIp(currentShow.cinema.IpAdress)
+        setSelectedCinema(currentShow.cinema)
         setSelectedShowTime(time);
 
     }
     const selectShowDate = (date:any) =>{
         setSelectedShowDate(date);
-        // console.log("d ==========================>",selectShowDate === date , date , selectedShowDate);
+        // //console.log("d ==========================>",selectShowDate === date , date , selectedShowDate);
     }
 
     useEffect(()=>{
         if(selectedShowDate&&selectedShowTime&&selectedCinema){
         
-            const date = new Date(selectedShowDate).getTime();
-            history.push(`/select-chair/${props.movie.ShowNam}/${selectedCinemaIp}/${date}/${selectedShowTimeCode}/${selectedHallId}`);
+        
+            history.push({
+                pathname:`/select-chair`,
+                state: { 
+                    data: {
+                        showName:props.movie.ShowNam,
+                        cinema:selectedCinema,
+                        showDat:selectedShowDate,
+                        showTimeCode:selectedShowTimeCode,
+                        hallId:selectedHallId,
+                        timein:selectedTimeIn
+                    } }
+            });
         }
     },[selectedShowDate, selectedShowTime , selectedCinema])
     return (

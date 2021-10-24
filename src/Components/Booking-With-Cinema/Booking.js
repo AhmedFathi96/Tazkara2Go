@@ -5,7 +5,7 @@ import { getMovieCinemasRequested } from "../../React-Redux/Actions/get-movie-ci
 import CinemaUi from './CinemaUI';
 
 const Booking = (props) => {
-  //console.log(props)
+  ////console.log(props)
   //const [movie,setMovie]=useState({});
 const movie=props.location.data;
 const id=props.match.params.id;
@@ -17,7 +17,7 @@ dispatch(getMovieCinemasRequested({id:id}));
     
 }, []);
 useEffect(() => {
-    console.log(cinemas)
+    //console.log(cinemas)
     
 }, [cinemas]);
 

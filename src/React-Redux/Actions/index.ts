@@ -1,4 +1,3 @@
-import { getUnAvialableChairsUrl } from "../../Axios/urls";
 
 export const genericAction = (action:string) => ({
     fulfilled: `${action}_FULFILLED`,
@@ -8,6 +7,10 @@ export const genericAction = (action:string) => ({
 //// Movies Actions
 const getMovies= 'GET-Movies';
 export const getMoviesAction = genericAction(getMovies);
+
+//// Movies Actions
+const getBookCode= 'GET-BOOK-CODE';
+export const getBookCodeAction = genericAction(getBookCode);
 
 const getCinemaMovies= 'GET-CINEMA-MOVIES';
 export const getCinemaMoviesAction = genericAction(getCinemaMovies);

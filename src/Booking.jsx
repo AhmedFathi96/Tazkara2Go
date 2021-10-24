@@ -36,7 +36,7 @@ class Booking extends Component {
         });
       })
       .catch((error) => {
-        console.log(error);
+        //console.log(error);
       });
   };
 
@@ -51,7 +51,7 @@ class Booking extends Component {
         await this.state({selectedCinemaIpAdress})
       })
       .catch((error) => {
-        console.log(error);
+        //console.log(error);
       });
   };
 
@@ -71,7 +71,7 @@ class Booking extends Component {
         this.setState({ ShowTimes: ShowTimes });
       })
       .catch((error) => {
-        console.log(error);
+        //console.log(error);
       });
     //await this.setState({ShowTimes})
   };
@@ -95,7 +95,7 @@ class Booking extends Component {
 
   render() {
     const { movie } = this.state;
-   //console.log(this.state.ShowTimes);
+   ////console.log(this.state.ShowTimes);
 
     return (
       <>

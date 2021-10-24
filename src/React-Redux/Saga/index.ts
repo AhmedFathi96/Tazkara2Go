@@ -11,6 +11,7 @@ import { watchGetUnAvailableChairsSaga } from "./get-unAvailable-chairs-saga";
 import { watchHoldChairSaga} from "./hold-chair-saga";
 import { watchUnHoldChairSaga } from "./unhold-chair-saga";
 import { watchUnHoldChairsSaga } from "./unhold-chairs-saga";
+import { watchGetBookCodeSaga } from "./get-book-code-saga";
 
 export default function* rootSaga() {
     yield all([
@@ -25,7 +26,8 @@ export default function* rootSaga() {
         watchGetUnAvailableChairsSaga (),
         watchHoldChairSaga(),
         watchUnHoldChairSaga(),
-        watchUnHoldChairsSaga()
+        watchUnHoldChairsSaga(),
+        watchGetBookCodeSaga()
 
     ])}
     

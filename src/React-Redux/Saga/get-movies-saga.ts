@@ -9,7 +9,7 @@ function* getMoviesSaga() {
     try {
   
         const res : AxiosResponse= yield call(getMovies);
-        //console.log(res.data.GetShowsResult)
+        ////console.log(res.data.GetShowsResult)
         
         yield put(getMoviesSucceeded(res.data.GetShowsResult));
     } catch (e) {
