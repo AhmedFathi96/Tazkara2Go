@@ -12,7 +12,7 @@ function* getCinemaMoviesSaga(action:typeof actionType.actions) {
     try {
         const payload = action.payload;
         const res : AxiosResponse= yield call(getCinemaMovies,payload.id);
-        //console.log(res.data.GetShowsResult)
+        ////console.log(res.data.GetShowsResult)
         
         yield put(getCinemaMoviesSucceeded(res.data.GetShowsByCinemaIdResult));
     } catch (e) {

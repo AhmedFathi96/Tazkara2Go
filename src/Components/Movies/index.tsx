@@ -17,13 +17,13 @@ const Movies: React.FC = (props:any) => {
       if(url.includes("cinema")){
         const _id=props.match.params.id;
 
-        console.log("id =====================>",_id)
+        //console.log("id =====================>",_id)
 
         dispatch(getCinemaMoviesRequested({id:_id}))
       }else{
         dispatch(getMoviesRequested());
       }
-        console.log("url =====================>",url , url.includes("cinema"))
+        //console.log("url =====================>",url , url.includes("cinema"))
     }, [url]);
 
 

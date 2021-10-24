@@ -16,7 +16,7 @@ export const useSelect = <TSelected>(
 );
 
 
-// export const selectToken = (state: IRootReducerState) => state.authReducer.token
+export const selectBookCode = (state: IRootReducerState) => state.bookingKeyReducer.bookCode
 
 // export const selectRole = (state: IRootReducerState) => state.authReducer.role
 

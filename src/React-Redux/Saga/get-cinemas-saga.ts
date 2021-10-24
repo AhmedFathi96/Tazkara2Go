@@ -9,7 +9,7 @@ function* getCinemasSaga() {
     try {
   
         const res : AxiosResponse= yield call(getCinemas);
-       // console.log("data =======================>",res.data.GetCinemasResult)
+       // //console.log("data =======================>",res.data.GetCinemasResult)
         
         yield put(getCinemasSucceeded(res.data.GetCinemasResult));
     } catch (e) {

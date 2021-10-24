@@ -14,7 +14,7 @@ function* getMovieScheduleSaga(action:typeof actionType.actions) {
 
     try {
         const payload = action.payload;
-        // console.log("showName ==========================>",payload.showName)
+        // //console.log("showName ==========================>",payload.showName)
         let data:any[] = [];
         const cinemas : AxiosResponse= yield call(getCinemas);
 
@@ -22,16 +22,16 @@ function* getMovieScheduleSaga(action:typeof actionType.actions) {
             if (cinemas.data.GetCinemasResult.hasOwnProperty(i)) {
                 const res:AxiosResponse =  yield call(getMovieCinemaTimes,cinemas.data.GetCinemasResult[i].IpAdress,payload.showName);
                 if(res.data.GetShowTimesByShowNameResult.length > 0){
-                    //console.log("data 2 ==========================>",res.data.GetShowTimesByShowNameResult)
+                    ////console.log("data 2 ==========================>",res.data.GetShowTimesByShowNameResult)
                     data.push({cinema: cinemas.data.GetCinemasResult[i], shows:res.data.GetShowTimesByShowNameResult})
                 }
             }
         }
 
-        //console.log("data 3 ==========================>",data)
+        ////console.log("data 3 ==========================>",data)
         yield put(getMovieScheduleSucceeded(data));
     } catch (e) {
-        console.log(e)
+        //console.log(e)
     } 
 }
 

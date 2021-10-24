@@ -30,7 +30,7 @@ class MovieDetails extends Component {
       .then(async () => {
         await this.setcast_crew();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => //console.log(err));
   };
   goToTickets = async () => {
     this.props.history.push({
@@ -56,7 +56,7 @@ class MovieDetails extends Component {
             item.workerRole.includes("Voice")
           )
       );
-      // console.log("crew",crew)
+      // //console.log("crew",crew)
     }
     await this.setState({ cast });
     await this.setState({ crew });

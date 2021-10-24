@@ -38,7 +38,7 @@ const CinemaTimes:React.FC = (props:any) => {
     }, [movies,cinemas]);
 
     useEffect(() => {
-        console.log("movie , cinemas ===================>",movie,cinemas)
+        //console.log("movie , cinemas ===================>",movie,cinemas)
     }, [movies,cinemas]);
     return(
         <>
@@ -48,8 +48,7 @@ const CinemaTimes:React.FC = (props:any) => {
                 <i className="fas fa-angle-up"></i>
             </a>
 
-        
-
+    
             <section className="window-warning inActive">
                 <div className="lay"></div>
                 <div className="warning-item">

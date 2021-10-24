@@ -8,7 +8,6 @@ import Footer from './Components/Footer/Footer';
 import Movies from './Components/Movies'
 import Cinemas from './Components/Cinemas'
 import MovieDetails from "./Components/Movie-Details";
-import Booking from "./Components/Booking-With-Cinema/Booking";
 import { Provider } from 'react-redux';
 import configureStore from './React-Redux/store';
 import {UAParser} from 'ua-parser-js';
@@ -27,16 +26,6 @@ const store = configureStore();
 
 function App() {
   
-// const dispatch=useDispatch();
-// const selector=useSelect(state=>state.movieCinemaTimesReducer)
-// useEffect(()=>{
-//   dispatch(getMovieCinemaTimesRequested({ip:"62.193.99.221",showName:"Dune"}))
-
-// },[])
-// useEffect(()=>{
-//   console.log(selector)
-
-// },[selector])
 
 
   return (
@@ -114,7 +103,7 @@ function App() {
                   component={(props) => (
                     <SelectChair {...props} />
                   )}
-                  path="/select-chair/:showName/:cinemaIP/:showDate/:showTimeCode/:hallId"
+                  path="/select-chair"
                   exact
                 />
                 <Route

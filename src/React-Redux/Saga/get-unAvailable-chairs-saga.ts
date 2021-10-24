@@ -11,16 +11,15 @@ const actionType = union(getUnAvialableChairsRequested);
 function* getUnAvailableChairsSaga(action:typeof actionType.actions) {
 
     try {
-       // console.log(action)
+       // //console.log(action)
         const payload = action.payload;
-     //console.log("payload",payload)
+     ////console.log("payload",payload)
         const res : AxiosResponse= yield call(getUnAvialableChairs,payload.CinemaIpAdress,payload.hallId,payload.ShowDate,payload.ShowTimeCod,payload.ShowName);
-      
-        //CinemaIpAdress:string,hallId:string,ShowDate:string,ShowTimeCod:string,ShowName:string
-        yield put(getUnAvialableChairsSucceeded(res.data));
+        // console.log("res.data.GetUnAvialableChairsResult =====================================>",res.data.GetUnAvialableChairsResult)
+        yield put(getUnAvialableChairsSucceeded(res.data.GetUnAvialableChairsResult));
     } catch (e) {
         //yield put(getMoviesFailed(e));
-        console.log(e)
+        //console.log(e)
         //throw new Error("Page Not Found 404");
     } 
 }

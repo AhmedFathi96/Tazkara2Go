@@ -12,16 +12,16 @@ const actionType = union(getHallChairsRequested);
 function* getHallChairsSaga(action:typeof actionType.actions) {
 
     try {
-       // console.log(action)
+       // //console.log(action)
         const payload = action.payload;
-     //console.log("payload",payload)
+     ////console.log("payload",payload)
         const res : AxiosResponse= yield call(getHallChairs,payload.CinemaIpAdress,payload.ShowTimeCod,payload.hallid);
-       // console.log("saga halls chairs",res.data.GetHallChairsResult)
+       // //console.log("saga halls chairs",res.data.GetHallChairsResult)
         const re= res.data.GetHallChairsResult.map((c:IChair)=> c.selected = false)
         yield put(getHallChairsSucceeded(res.data.GetHallChairsResult));
     } catch (e) {
         //yield put(getMoviesFailed(e));
-        console.log(e)
+        //console.log(e)
         //throw new Error("Page Not Found 404");
     } 
 }
