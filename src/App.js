@@ -82,7 +82,7 @@ function App() {
                       component={(props) => (
                         <MovieCheckout {...props} />
                       )}
-                      path="/movie-checkout/:showName/:cinemaIP/:showDate/:showTimeCode/:hallId"
+                      path="/movie-checkout"
                       exact
                     />
                     <Route

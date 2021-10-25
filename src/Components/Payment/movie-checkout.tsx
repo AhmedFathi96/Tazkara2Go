@@ -1,10 +1,5 @@
-
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { getCinemas } from "../../Axios/get-cinemas";
-import { useSelect } from "../../helper";
-import { ICinema, IMovie } from "../../models";
-import { getCinemasRequested } from "../../React-Redux/Actions/cinema-action";
+
 interface IContact{
     FullName:string,
     Email:string,
@@ -13,24 +8,32 @@ interface IContact{
 }
 
 const MovieCheckout:React.FC = (props:any) => {
-    const cinemaIP = props.match.params.cinemaIP;
-    const showTimeCode = props.match.params.showTimeCode;
-    const hallId = props.match.params.hallId;
-    const showName = props.match.params.showName;
-    const showDate = props.match.params.showDate;
-    const [cinema,setCinema]=useState<ICinema>()
-    const [contactData,setcontactData]=useState<IContact>()
-    const dispatch=useDispatch();
-    const {cinemas}=useSelect(state=>state.cinemasReducer);
-    useEffect(()=>{
-        dispatch(getCinemasRequested());
-    },[])
-    useEffect(()=>{
-        const cinem=cinemas.find(c=>c.IpAdress==cinemaIP);
-        setCinema(cinem)
-    },[cinemas])
-
-
+    const data=props.history.location.state?.data;
+    const [timer, setTimer] = useState<any>();
+    const [timeLeft, setTimeLeft] = useState(data.timer);
+    
+    useEffect(() => {
+      // exit early when we reach 0
+      if (!timeLeft){
+       
+        return;
+      };
+  
+      // save intervalId to clear the interval when the
+      // component re-renders
+      const intervalId = setInterval(() => {
+        setTimeLeft(timeLeft - 1);
+        let minutes = Math.floor((timeLeft - 1 ) / 60); // get minutes
+        let seconds = timeLeft - 1 -  (minutes * 60); //  get seconds
+        setTimer("0"+minutes+":"+seconds)
+      }, 1000);
+  
+      // clear interval on re-render to avoid memory leaks
+      return () => clearInterval(intervalId);
+      // add timeLeft as a dependency to re-rerun the effect
+      // when we update it
+    }, [timeLeft]);
+  
     return (
         <>
 
@@ -42,10 +45,10 @@ const MovieCheckout:React.FC = (props:any) => {
                 <div className="container">
                     <div className="details-banner-wrapper">
                         <div className="details-banner-content style-two">
-                            <h3 className="title">{showName}</h3>
+                            <h3 className="title">{data.showName}</h3>
                             <div className="tags">
-                                <a href="#0">{cinema?.CinemaNamE}</a>
-                                <a href="#0">English - 2D</a>
+                                <a href="#0">{data.cinema.CinemaNamE}</a>
+                                
                             </div>
                         </div>
                     </div>
@@ -58,7 +61,7 @@ const MovieCheckout:React.FC = (props:any) => {
                     <div className="page-title-area">
                        
                         <div className="item">
-                            <h5 className="title">05:00</h5>
+                            <h5 className="title">{timer}</h5>
                             <p>Mins Left</p>
                         </div>
                     </div>
@@ -182,17 +185,17 @@ const MovieCheckout:React.FC = (props:any) => {
                                 <h4 className="title">booking summery</h4>
                                 <ul>
                                     <li>
-                                        <h6 className="subtitle">{showName}</h6>
+                                        <h6 className="subtitle">{data.showName}</h6>
                                         
                                     </li>
                                     <li>
                                         <h6 className="subtitle">
-                                            <span>{cinema?.CinemaNamE}</span>
-                                            <span className="info">{hallId}</span>
+                                            <span>{data.cinema.CinemaNamE}</span>
+                                            <span className="info">{data.hallId}</span>
                                             
                                         </h6>
                                         <div className="info">
-                                            <span>{showDate}, {showTimeCode}</span> <span>Tickets</span>
+                                            <span>{data.showDat}, {data.timein}</span> <span>Tickets</span>
                                         </div>
                                     </li>
                                     <li>

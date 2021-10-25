@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link,useHistory } from 'react-router-dom';
+
 import { useSelect } from '../../helper';
 import { IChair } from '../../models';
 import { getBookCodeRequested } from '../../React-Redux/Actions/get-book-code-action';
@@ -9,7 +10,8 @@ import { getUnAvialableChairsRequested } from '../../React-Redux/Actions/get-unA
 import { unholdChairsRequested } from '../../React-Redux/Actions/unhold-chairs-action';
 import Seat from './seat';
 const SelectChair: React.FC = (props:any) => {
-  const data = props.history.location.state?.data
+  const data = props.history.location.state?.data;
+  const history=useHistory();
 
   const dispatch=useDispatch();
   const {chairs}=useSelect(state=>state.hallChairsReducer);
@@ -40,6 +42,7 @@ const SelectChair: React.FC = (props:any) => {
       dispatch(getUnAvialableChairsRequested({ CinemaIpAdress:data.cinema.IpAdress,ShowTimeCod:data.showTimeCode,hallId:data.hallId,ShowName:data.showName,ShowDate:datestring}));
     }
   }, [data]);
+  
 
   const [timeLeft, setTimeLeft] = useState((data.cinema.holdWaitingMinutes -1)*60);
   const [timer, setTimer] = useState<any>();
@@ -145,6 +148,25 @@ const SelectChair: React.FC = (props:any) => {
 
 
   }
+  const goToPayment=()=>{
+    if(data){
+        
+        
+      history.push({
+          pathname:`/movie-checkout`,
+          state: { 
+              data: {
+                 showName:data.showName,
+                        cinema:data.cinema,
+                        showDat:data.showDat,
+                        showTimeCode:data.showTimeCode,
+                        hallId:data.hallId,
+                        timein:data.timein,
+                        timer:timeLeft
+              } }
+      });
+  }
+  }
     return(
         <>
             <section className="page-title bg-one">
@@ -216,7 +238,7 @@ const SelectChair: React.FC = (props:any) => {
                     <h3 className="title">$150</h3>
                   </div>
                   <div className="book-item">
-                    <a href="movie-checkout.html" className="custom-button">
+                    <a onClick={()=>goToPayment()} className="custom-button">
                       proceed
                     </a>
                   </div>
@@ -227,7 +249,7 @@ const SelectChair: React.FC = (props:any) => {
           </section>
           
           <section>
-            <Link to={`/movie-checkout/${showName}/${cinemaIP}/${showDate}/${showTimeCode}/${hallId}`}> Submit</Link>
+            {/* <Link to={`/movie-checkout/${showName}/${cinemaIP}/${showDate}/${showTimeCode}/${hallId}`}> Submit</Link> */}
            
           </section>
           
