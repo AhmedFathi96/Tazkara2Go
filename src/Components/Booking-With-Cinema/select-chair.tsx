@@ -17,7 +17,10 @@ const SelectChair: React.FC = (props:any) => {
   const {chairs}=useSelect(state=>state.hallChairsReducer);
   const {unavailableChairs}=useSelect(state=>state.unAvailableChairsReducer);
   const {bookCode}=useSelect(state=>state.bookingKeyReducer);
-  // const [selectedChairs,setselectedChairs]=useState<any>();
+
+  const [selectedChairs,setSelectedChairs]=useState<any[]>([]);
+  const [chair,setChair]=useState<any>({seat:{},selected:false});
+  const [chairsTotalPrice,setChairsTotalPrice]=useState<number>(0);
   const [currentChairs,setCurrentChairs]=useState<any>();
   const [chairsIndexing,setChairsIndexing]=useState<any>();
   const [selectedShowDate,setSelectedShowDate]=useState<any>();
@@ -58,6 +61,7 @@ const SelectChair: React.FC = (props:any) => {
           bookcode:bookCode
         }
       ));
+      history.push('/')
       return;
     };
 
@@ -98,7 +102,7 @@ const SelectChair: React.FC = (props:any) => {
     let rows:any[]= [];
     let indexes:any[] = []
     if(maxChair.maxRowNumber >0&&maxChair.maxColNumber>0){
-      for(let i=1;i<=maxChair.maxRowNumber;i++){
+      for(let i=maxChair.maxRowNumber;i>0;i--){
         let cols = new Array(maxChair.maxColNumber).fill(<li className="single-seat emptySeat"></li>);
         const currentChairs = chairs.filter(ch=> Number.parseInt(ch.RowNo) === i );  
         if(currentChairs.length>0){
@@ -107,7 +111,10 @@ const SelectChair: React.FC = (props:any) => {
             const unavailableChair = unavailableChairs.filter(cha=> cha.ChairId === ch.ChairId );
             // console.log("unavailableChair ======================>",unavailableChair)
             if(unavailableChair.length > 0){
-              cols[Number.parseInt(ch.ColNo)-1]=<Seat chair={ch} selected={false} unavailable={true} holdData={
+              cols[Number.parseInt(ch.ColNo)-1]=<Seat chair={ch} selected={false} unavailable={true} 
+              selectChair={handleSelectSeat}
+              unSelectChair={handleUnSelectSeat}
+              holdData={
               {
                 CinemaIpAdress:data.cinema.IpAdress,
                 ShowTimeCod:data.showTimeCode,
@@ -120,7 +127,10 @@ const SelectChair: React.FC = (props:any) => {
               }
               }  />
             }else{
-              cols[Number.parseInt(ch.ColNo)-1]=<Seat chair={ch} selected={false} unavailable={false} holdData={
+              cols[Number.parseInt(ch.ColNo)-1]=<Seat chair={ch} selected={false} unavailable={false} 
+              selectChair={handleSelectSeat}
+              unSelectChair={handleUnSelectSeat}
+              holdData={
                 {
                   CinemaIpAdress:data.cinema.IpAdress,
                   ShowTimeCod:data.showTimeCode,
@@ -156,16 +166,58 @@ const SelectChair: React.FC = (props:any) => {
           pathname:`/movie-checkout`,
           state: { 
               data: {
-                 showName:data.showName,
+                  showName:data.showName,
                         cinema:data.cinema,
                         showDat:data.showDat,
                         showTimeCode:data.showTimeCode,
                         hallId:data.hallId,
                         timein:data.timein,
-                        timer:timeLeft
+                        timer:timeLeft,
+                        selectedChairs:selectedChairs,
+                        chairsTotalPrice:chairsTotalPrice
               } }
       });
   }
+  }
+
+  useEffect(()=>{
+    if(chair.selected){
+      let seats = selectedChairs;
+      seats.push(chair.seat);
+  
+      setSelectedChairs(seats);
+      console.log("handleSelectSeat price=======================>",chairsTotalPrice)
+
+      if(Number.isNaN(chairsTotalPrice)){
+        setChairsTotalPrice(Number.parseInt(chair.seat.ChairPrice));
+      }else{
+        const price = chairsTotalPrice + Number.parseInt(chair.seat.ChairPrice);
+        setChairsTotalPrice(price);
+      }
+
+      
+    }else{
+
+      const seats = selectedChairs.filter((ch:IChair)=> ch.ChairId !== chair.seat.ChairId);
+      console.log("handleUnSelectSeat price=======================>",chairsTotalPrice);
+
+      if(Number.isNaN(chairsTotalPrice)){
+        setChairsTotalPrice(Number.parseInt(chair.seat.ChairPrice));
+      }else{
+        const price = chairsTotalPrice - Number.parseInt(chair.seat.ChairPrice);
+        setChairsTotalPrice(price);
+      }
+      
+      setSelectedChairs(seats);
+    }
+  },[chair])
+
+  const handleSelectSeat = (seat:IChair) =>{
+    setChair({seat:seat, selected:true});
+  }
+
+  const handleUnSelectSeat = (seat:IChair) =>{
+    setChair({seat:seat, selected:false});
   }
     return(
         <>
@@ -231,16 +283,26 @@ const SelectChair: React.FC = (props:any) => {
                 <div className="proceed-to-book">
                   <div className="book-item">
                     <span>You have Choosed Seat</span>
-                    <h3 className="title">d9, d10</h3>
+                    <h3 className="title">
+                      {
+                        selectedChairs.map((ch:IChair)=> `${ch.ChairRowTitle}${ch.ChairId},`)
+                      }
+                    </h3>
                   </div>
                   <div className="book-item">
                     <span>total price</span>
-                    <h3 className="title">$150</h3>
+                    <h3 className="title">{chairsTotalPrice?`$ ${chairsTotalPrice}`:''}</h3>
                   </div>
                   <div className="book-item">
-                    <a onClick={()=>goToPayment()} className="custom-button">
-                      proceed
-                    </a>
+                    {
+                      chairsTotalPrice?(
+                        <a onClick={()=>goToPayment()} className="custom-button">
+                          proceed
+                        </a>
+                      ):
+                      ''
+                    }
+                    
                   </div>
                 </div>
               </div>
@@ -249,8 +311,7 @@ const SelectChair: React.FC = (props:any) => {
           </section>
           
           <section>
-            {/* <Link to={`/movie-checkout/${showName}/${cinemaIP}/${showDate}/${showTimeCode}/${hallId}`}> Submit</Link> */}
-           
+        
           </section>
           
         </>

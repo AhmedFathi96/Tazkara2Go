@@ -14,26 +14,26 @@ const MovieCheckout:React.FC = (props:any) => {
     
     useEffect(() => {
       // exit early when we reach 0
-      if (!timeLeft){
-       
-        return;
-      };
-  
+        if (!timeLeft){
+        
+            return;
+        };
+
       // save intervalId to clear the interval when the
       // component re-renders
-      const intervalId = setInterval(() => {
-        setTimeLeft(timeLeft - 1);
-        let minutes = Math.floor((timeLeft - 1 ) / 60); // get minutes
-        let seconds = timeLeft - 1 -  (minutes * 60); //  get seconds
-        setTimer("0"+minutes+":"+seconds)
-      }, 1000);
-  
+        const intervalId = setInterval(() => {
+            setTimeLeft(timeLeft - 1);
+            let minutes = Math.floor((timeLeft - 1 ) / 60); // get minutes
+            let seconds = timeLeft - 1 -  (minutes * 60); //  get seconds
+            setTimer("0"+minutes+":"+seconds)
+        }, 1000);
+
       // clear interval on re-render to avoid memory leaks
-      return () => clearInterval(intervalId);
+        return () => clearInterval(intervalId);
       // add timeLeft as a dependency to re-rerun the effect
       // when we update it
     }, [timeLeft]);
-  
+
     return (
         <>
 
@@ -59,7 +59,7 @@ const MovieCheckout:React.FC = (props:any) => {
             <section className="page-title bg-one">
                 <div className="container">
                     <div className="page-title-area">
-                       
+                    
                         <div className="item">
                             <h5 className="title">{timer}</h5>
                             <p>Mins Left</p>
@@ -125,7 +125,7 @@ const MovieCheckout:React.FC = (props:any) => {
                                             <span>Aman-Masary</span>
                                         </a>
                                     </li>
-                                  
+                                
                                 </ul>
                                 <div className="tab-content" id="pills-tabContent">
                                 <div className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
@@ -201,7 +201,7 @@ const MovieCheckout:React.FC = (props:any) => {
                                     <li>
                                         <h6 className="subtitle mb-0">
                                             <span>Tickets Price</span>
-                                            <span>$150</span>
+                                            <span>$ {data.chairsTotalPrice}</span>
                                         </h6>
                                     </li>
                                 </ul>
@@ -215,7 +215,7 @@ const MovieCheckout:React.FC = (props:any) => {
                                             <span>2 Nachos Combo</span>
                                         </span>
                                     </li>
-                                   
+                                
                                 </ul>
                                 <ul>
                                     <li>
@@ -233,7 +233,7 @@ const MovieCheckout:React.FC = (props:any) => {
                             <div className="proceed-area  text-center">
                                 <h6 className="subtitle">
                                     <span>Amount Payable</span>
-                                    <span>$222</span>
+                                    <span>$ {data.chairsTotalPrice}</span>
                                 </h6>
                                 <a href="#0" className="custom-button back-button">
                                     proceed

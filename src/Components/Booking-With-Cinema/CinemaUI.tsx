@@ -71,6 +71,17 @@ const CinemaUi=(props:IProps)=> {
 
                 }
                 
+            }else{
+                ret.push({
+                    showTime:show.ShowTimeName,
+                    enddate:show.enddate,
+                    startdate: currentDate.toLocaleDateString("en-US"),
+                    isVip:show.isVip,
+                    hallid:show.hallid,
+                    ShowTimeCod:show.ShowTimeCod,
+                    timein:show.timein,
+                    inBetween:getDaysArray(endDate,endDate).map((d:any)=>d.toLocaleDateString("en-US"))
+                })
             }
 
         })
@@ -82,9 +93,12 @@ const CinemaUi=(props:IProps)=> {
         let a:any[] = [];
         let d;
         for(a=[],d=new Date(s);d<=e;d.setDate(d.getDate()+1)){
-            //console.log("toLocaleDateString==================>",d.toLocaleDateString("en-US"))
+            
             a.push(new Date(d.toLocaleDateString("en-US")));
         }
+
+        // a.push(new Date(e[e.length -1].toLocaleDateString("en-US")));
+        // console.log("toLocaleDateString==================>",a)
         return a;
     };
 
@@ -98,7 +112,7 @@ const CinemaUi=(props:IProps)=> {
             }
         });
         setShows(schedule);
-        if(schedule[0] !== undefined){
+        if(schedule[0] !== undefined && schedule[0].times[0]){
             setShowDate(schedule[0].times[0].inBetween);
 
         }

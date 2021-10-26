@@ -8,15 +8,17 @@ interface IProp{
     selected:boolean,
     unavailable:boolean,
     holdData:any;
-
+    selectChair:(chair:IChair)=>void;
+    unSelectChair:(chair:IChair)=>void;
 }
 const Seat:React.FC<IProp> = (props:IProp) => {
-    const {chair,selected,unavailable, holdData} = props;
+    const {chair,selected,unavailable, holdData,selectChair,unSelectChair} = props;
     const [clicked,setClicked] = useState(selected);
     const dispatch = useDispatch();
 
     const holdChair = () =>{
         if((!clicked) === true){
+            selectChair(chair);
             dispatch(holdChairRequested({ 
                 CinemaIpAdress:holdData.CinemaIpAdress,
                 ShowTimeCod:holdData.ShowTimeCod,
@@ -30,6 +32,7 @@ const Seat:React.FC<IProp> = (props:IProp) => {
                 timein:holdData.timein,
             }))
         }else if((!clicked) === false){
+            unSelectChair(chair)
             dispatch(unholdChairRequested({ 
                 CinemaIpAdress:holdData.CinemaIpAdress,
                 ShowTimeCod:holdData.ShowTimeCod,
