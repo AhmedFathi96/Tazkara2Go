@@ -32,14 +32,17 @@ const CinemaUi=(props:IProps)=> {
     const [selectedShowTimeCode, setSelectedShowTimeCode] = useState();
     const [selectedCinema, setSelectedCinema] = useState<any>();
     const [selectedTimeIn, setSelectedTimeIn] = useState();
+    const [currentShowDates, setCurrentShowDates] = useState<any[]>([]);
     useEffect(() => {
         //dispatch(getMovieCinemasRequested({id:id}));
         dispatch(getMoviesRequested());
-        dispatch(getMovieCinemaTimesRequested({ip:cinema.location,showName:props.movie.ShowNam}))
+        dispatch(getMovieCinemaTimesRequested({ip:cinema.IpAdress,showName:props.movie.ShowNam}))
     }, []);
 
     const getShowDates = (shows:any[]) =>{
         let ret:any[] = [];
+        
+
         shows.forEach(show =>{
             const currentDate:any = new Date();
             const startDate:any = new Date(show.startdate);
@@ -85,7 +88,6 @@ const CinemaUi=(props:IProps)=> {
             }
 
         })
-
         return ret;
     }
 
@@ -104,23 +106,23 @@ const CinemaUi=(props:IProps)=> {
 
 
     useEffect(() => {
-        //console.log("movieSchedule===========================>",movieSchedule)
+        console.log("movieSchedule===========================>",movieSchedule)
         const schedule = movieSchedule.map( sch=>{
             return{
                 cinema: sch.cinema,
                 times: getShowDates(sch.shows)
             }
         });
+
+        
         setShows(schedule);
         if(schedule[0] !== undefined && schedule[0].times[0]){
             setShowDate(schedule[0].times[0].inBetween);
 
         }
-
-        //console.log("schedule ========================>", schedule);
-
-
+        //console.log("schedule ========================>", schedule)
     }, [movieSchedule]);
+
     const selectShowTime = (currentShow:any,time:any) =>{
         shows.forEach((sh:any) => {
             if(sh.cinema.CinemaNamA === currentShow.cinema.CinemaNamA ){
@@ -137,9 +139,30 @@ const CinemaUi=(props:IProps)=> {
         setSelectedShowTime(time);
 
     }
-    const selectShowDate = (date:any) =>{
+    const selectShowDate = (currentShow:any,date:any) =>{
+        // console.log("d ==========================>",shows);
+
+        shows.forEach((sh:any) => {
+            if(sh.cinema.CinemaNamA === currentShow.cinema.CinemaNamA ){
+                const d = sh.times.map((ti:any) =>{
+                    const da = ti.inBetween.find((ins:any)=> ins === date);
+                    if(da){
+                        return{
+                            ...ti
+                        }
+                    }
+                })
+                console.log("d ==========================>",d);
+                setCurrentShowDates(d);
+                // setSelectedHallId(d.hallid);
+                // setShowDate(d.inBetween);
+                // setSelectedShowTimeCode(d.ShowTimeCod);
+                // setSelectedTimeIn(d.timein)
+            }
+        });
+
         setSelectedShowDate(date);
-        // //console.log("d ==========================>",selectShowDate === date , date , selectedShowDate);
+        // console.log("d ==========================>",date);
     }
 
     useEffect(()=>{
@@ -164,26 +187,29 @@ const CinemaUi=(props:IProps)=> {
         (
             shows?
             shows.map((show:any)=>
+        
             <li  style={{'display':'flex', 'alignItems':'center'}}>
-            <div className="movie-name">
-                <a href={cinema.location} className="name" target='blank'>{show.cinema.CinemaNamA} - {show.cinema.CinemaNamE}</a>
-            
-            </div>
-            <div className="movie-schedule middle">
-            
-                {
-                    show.times.map((item:any)=><div className={`item ${selectedShowTime === item.showTime?'selected':'unselected'}`} onClick={()=>selectShowTime(show,item.showTime)} >{item.showTime}</div>)
-                }
-            
-            </div>
-            <div className="movie-schedule">
-                {
-                    showDate&&showDate.map((item:any)=><div className={`item ${selectedShowDate === item?'selected':'unselected'}`} onClick={()=>selectShowDate(item)}>{item}</div>)
-                }
-            
-            </div>
-            </li>)
-            
+                <div className="movie-name">
+                    {show.isVip == "1"?<span>Vip</span>:<></>}
+                    <a href={cinema.location} className="name" target='blank'>{show.cinema.CinemaNamA} - {show.cinema.CinemaNamE}</a>
+                
+                </div>
+                <div className="movie-schedule middle">
+                    {
+                        showDate&&showDate.map((item:any)=><div className={`item ${selectedShowDate === item?'selected':'unselected'}`} onClick={()=>selectShowDate(show,item)}>{item}</div>)
+                    }
+                
+                
+                
+                </div>
+                <div className="movie-schedule">
+                    {
+                        currentShowDates&&currentShowDates.map((item:any)=><div className={`item ${selectedShowTime === item.showTime?'selected':'unselected'}`} onClick={()=>selectShowTime(show,item.showTime)} >{item.showTime}</div>)
+                    }
+                
+                </div>
+            </li>
+            )
             :
             <></>
             

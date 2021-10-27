@@ -78,6 +78,7 @@ const CinemaTimes:React.FC = (props:any) => {
                 <div style={{'margin':'0 1rem'}}>
                     <div className="row justify-content-center">
                         <div className="col-lg-12 mb-12 mb-lg-12">
+
                             <ul className="seat-plan-wrapper bg-five">
                             {   
                                 movie&&cinemas.map((c:ICinema)=><CinemaUi  cinema={c} movie={movie} />

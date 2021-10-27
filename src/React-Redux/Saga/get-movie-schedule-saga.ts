@@ -1,11 +1,10 @@
 import { AxiosResponse } from "axios";
-import { all, call, put, takeLatest } from "redux-saga/effects";
+import { call, put, takeLatest } from "redux-saga/effects";
 import {  getMovieScheduleAction } from "../Actions/index"; 
 import { union } from "ts-action";
 import { getMovieScheduleRequested,getMovieScheduleSucceeded } from "../Actions/get-movie-schedule";
 import { getMovieCinemaTimes } from "../../Axios/get-movie-cinema-times";
 import { getCinemas } from "../../Axios/get-cinemas";
-import { ICinema } from "../../models";
 
 
 
@@ -17,8 +16,8 @@ function* getMovieScheduleSaga(action:typeof actionType.actions) {
         // //console.log("showName ==========================>",payload.showName)
         let data:any[] = [];
         const cinemas : AxiosResponse= yield call(getCinemas);
-
-        for (const i in [1,2,3]) {
+        const len = Array.from(Array(cinemas.data.length).keys())
+        for (const i in len) {
             if (cinemas.data.GetCinemasResult.hasOwnProperty(i)) {
                 const res:AxiosResponse =  yield call(getMovieCinemaTimes,cinemas.data.GetCinemasResult[i].IpAdress,payload.showName);
                 if(res.data.GetShowTimesByShowNameResult.length > 0){
