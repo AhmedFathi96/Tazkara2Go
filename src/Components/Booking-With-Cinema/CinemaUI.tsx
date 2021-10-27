@@ -112,7 +112,7 @@ const CinemaUi=(props:IProps)=> {
             }
         });
         setShows(schedule);
-        if(schedule[0] !== undefined && schedule[0].times[0]){
+        if(schedule[0] !== undefined&&schedule[0].times[0]!== undefined){
             setShowDate(schedule[0].times[0].inBetween);
 
         }

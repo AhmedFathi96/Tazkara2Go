@@ -12,6 +12,11 @@ import { watchHoldChairSaga} from "./hold-chair-saga";
 import { watchUnHoldChairSaga } from "./unhold-chair-saga";
 import { watchUnHoldChairsSaga } from "./unhold-chairs-saga";
 import { watchGetBookCodeSaga } from "./get-book-code-saga";
+import { watchGetUserInfoSaga } from "./get-user-info-saga";
+import { watchLoginSaga } from "./login-saga";
+import { watchregisterSaga } from "./register-saga";
+import { watchAmanPaymentSaga } from "./aman-saga";
+import { watchCardPaymentSaga } from "./credit-card-saga";
 
 export default function* rootSaga() {
     yield all([
@@ -27,7 +32,12 @@ export default function* rootSaga() {
         watchHoldChairSaga(),
         watchUnHoldChairSaga(),
         watchUnHoldChairsSaga(),
-        watchGetBookCodeSaga()
+        watchGetBookCodeSaga(),
+        watchGetUserInfoSaga(),
+        watchLoginSaga(),
+        watchregisterSaga(),
+        watchAmanPaymentSaga(),
+        watchCardPaymentSaga()
 
     ])}
     

@@ -5,9 +5,6 @@ import { union } from "ts-action";
 import { getMovieScheduleRequested,getMovieScheduleSucceeded } from "../Actions/get-movie-schedule";
 import { getMovieCinemaTimes } from "../../Axios/get-movie-cinema-times";
 import { getCinemas } from "../../Axios/get-cinemas";
-import { ICinema } from "../../models";
-
-
 
 const actionType = union(getMovieScheduleRequested);
 function* getMovieScheduleSaga(action:typeof actionType.actions) {

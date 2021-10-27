@@ -174,7 +174,8 @@ const SelectChair: React.FC = (props:any) => {
                         timein:data.timein,
                         timer:timeLeft,
                         selectedChairs:selectedChairs,
-                        chairsTotalPrice:chairsTotalPrice
+                        chairsTotalPrice:chairsTotalPrice,
+                        bookCode:bookCode
               } }
       });
   }
