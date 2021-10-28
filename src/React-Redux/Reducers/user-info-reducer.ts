@@ -1,6 +1,6 @@
 import { reducer, on } from "ts-action";
 import { IUserInfo } from "../../models";
-import {getUserInfoSucceeded} from "../Actions/get-user-info-action"
+import {getUserInfoRequested, getUserInfoSucceeded} from "../Actions/get-user-info-action"
 interface Istate{
    info: IUserInfo,
     
@@ -12,6 +12,9 @@ export const userInfoReducer = reducer<Istate>( {
 },on(getUserInfoSucceeded,(state,{payload})=>({
     ...state,
     info:payload,
+    info__is_loading:false
+})),on(getUserInfoRequested,(state)=>({
+    ...state,
     info__is_loading:true
 }))
 )

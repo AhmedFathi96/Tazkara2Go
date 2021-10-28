@@ -77,6 +77,17 @@ export interface ILogin{
     history:any;
 
 }
+export interface ISanf {
+    NamEnglish: string;
+    Price: string;
+    RasidBegin: string;
+    SanfCod: string;
+    SanfNam: string;
+    StockNam: string;
+    categorynam: string;
+    categorynamE: string;
+    stockcod: string;
+}
 export interface IRegister{
     UserName:string;
     UserEmail:string;

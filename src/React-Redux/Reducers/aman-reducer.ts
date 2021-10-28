@@ -1,6 +1,6 @@
 import { reducer, on } from "ts-action";
 import { getData00Succeeded } from "../Actions/common-payment-actions";
-import { finalDataAmanSucceeded } from "../Actions/payByAman-action";
+import { finalDataAmanRequested, finalDataAmanSucceeded } from "../Actions/payByAman-action";
 interface IState{
    res:any,
    is_aman_payment_loading:boolean
@@ -11,11 +11,16 @@ export const amanReducer = reducer<IState>( {
   is_aman_payment_loading:false
     
   
-},on(finalDataAmanSucceeded,(state,{payload})=>({
+},on(finalDataAmanRequested,(state)=>({
     ...state,
-    res:payload,
-    is_aman_payment_loading:true
+     is_aman_payment_loading:true
 
    
+})),on(finalDataAmanSucceeded,(state,{payload})=>({
+  ...state,
+  res:payload,
+  is_aman_payment_loading:false
+
+ 
 }))
 )

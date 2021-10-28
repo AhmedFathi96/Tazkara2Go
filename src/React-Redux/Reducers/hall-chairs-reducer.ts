@@ -1,6 +1,6 @@
 import { reducer, on } from "ts-action";
 import { IChair} from '../../models';
-import { getHallChairsSucceeded} from "../Actions/get-hall-chairs-action";
+import { getHallChairsRequested, getHallChairsSucceeded} from "../Actions/get-hall-chairs-action";
 interface Istate{
     chairs: IChair[];
     
@@ -12,6 +12,11 @@ export const hallChairsReducer = reducer<Istate>( {
     movie_hall_chairs__is_loading:false
 },on(getHallChairsSucceeded,(state,{payload})=>({
     ...state,
-    chairs:payload
-}))
+    chairs:payload,
+    movie_hall_chairs__is_loading:false
+})),on(getHallChairsRequested,(state)=>({
+    ...state,
+    movie_hall_chairs__is_loading:true
+
+})),
 )

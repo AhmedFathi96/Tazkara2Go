@@ -26,3 +26,4 @@ export const holdChairUrl=(CinemaIpAdress:string,ShowTimeCod:string,hallId:strin
 export const unholdChairUrl=(CinemaIpAdress:string,ShowTimeCod:string,hallId:string,ShowDate:string,ChairId:string,bookcode:string)=>`https://cors-anywhere.herokuapp.com/http://${CinemaIpAdress}/CenimaSrvc.svc/UnHoldChair/${ShowTimeCod}/${hallId}/${ShowDate}/${ChairId}/web_${bookcode}`;
 export const UnHoldChairsUrl=(CinemaIpAdress:string,ShowTimeCod:string,hallId:string,ShowDate:string,bookcode:string)=>`https://cors-anywhere.herokuapp.com/http://${CinemaIpAdress}/CenimaSrvc.svc/UnHoldChairs/${ShowTimeCod}/${hallId}/${ShowDate}/web_${bookcode}`;
 export const getBookCodeUrl = `http://41.196.0.251:81/Service2.svc/NewBookCode`;
+export const getSanfByStockCodeUrl=(ip:string,stockcod:string)=>`https://cors-anywhere.herokuapp.com/http://${ip}/CenimaSrvc.svc/getsanfbystockcod/${stockcod}`;

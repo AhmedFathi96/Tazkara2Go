@@ -1,5 +1,5 @@
 import { reducer, on } from "ts-action";
-import {registerSucceeded} from "../Actions/register-action"
+import {registerRequested, registerSucceeded} from "../Actions/register-action"
 interface Istate{
    res: string;
     
@@ -12,6 +12,9 @@ export const registerReducer = reducer<Istate>( {
 },on(registerSucceeded,(state,{payload})=>({
     ...state,
     res:payload,
+    register__is_loading:false
+})),on(registerRequested,(state)=>({
+    ...state,
     register__is_loading:true
 }))
 )

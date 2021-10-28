@@ -72,6 +72,10 @@ const updateCinemaCard='Update-Cinema-Card';
 export const updateCinemaCardAction=genericAction(updateCinemaCard);
 const finalDataCard='Final-Data-Card';
 export const finalDataCardAction=genericAction(finalDataCard);
+//////popocorn
+const getSanfByStockCode='GET-Sanf-By-Stockcode';
+
+export const getSanfByStockCodeAction=genericAction(getSanfByStockCode);
 
 
 

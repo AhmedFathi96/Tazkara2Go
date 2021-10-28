@@ -1,5 +1,5 @@
 import { reducer, on } from "ts-action";
-import { getMovieScheduleSucceeded} from "../Actions/get-movie-schedule";
+import { getMovieScheduleRequested, getMovieScheduleSucceeded} from "../Actions/get-movie-schedule";
 interface IState{
     movieSchedule: any[];
     
@@ -10,6 +10,10 @@ export const movieScheduleReducer = reducer<IState>( {
     movieSchedule_is_loading:false
 },on(getMovieScheduleSucceeded,(state,{payload})=>({
     ...state,
-    movieSchedule:payload
+    movieSchedule:payload,
+    movieSchedule_is_loading:false
+})),on(getMovieScheduleRequested,(state)=>({
+    ...state,
+    movieSchedule_is_loading:true
 }))
 )

@@ -9,9 +9,7 @@ import { loginRequested } from "../../React-Redux/Actions/login-action";
 import { finalDataAmanRequested } from "../../React-Redux/Actions/payByAman-action";
 import { finalDataCardRequested } from "../../React-Redux/Actions/payByCard-action";
 import { amanReducer } from "../../React-Redux/Reducers/aman-reducer";
-interface    IK{
-    Key:string
-}
+
 const MovieCheckout: React.FC = (props: any) => {
     //const Key:String=localStorage.getItem("userKey")?.toString();
    const Key=localStorage.getItem("userKey");
