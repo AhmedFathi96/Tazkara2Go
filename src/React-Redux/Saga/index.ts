@@ -17,6 +17,8 @@ import { watchLoginSaga } from "./login-saga";
 import { watchregisterSaga } from "./register-saga";
 import { watchAmanPaymentSaga } from "./aman-saga";
 import { watchCardPaymentSaga } from "./credit-card-saga";
+import { watchGetSanfByStockcodeSaga } from "./sanf-by-stockcode-saga";
+import { watchGetCurrentDateTimeSaga } from "./get-current-date-time-saga";
 
 export default function* rootSaga() {
     yield all([
@@ -37,7 +39,9 @@ export default function* rootSaga() {
         watchLoginSaga(),
         watchregisterSaga(),
         watchAmanPaymentSaga(),
-        watchCardPaymentSaga()
+        watchCardPaymentSaga(),
+        watchGetSanfByStockcodeSaga() ,
+        watchGetCurrentDateTimeSaga()
 
     ])}
     

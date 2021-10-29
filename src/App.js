@@ -8,7 +8,7 @@ import Footer from './Components/Footer/Footer';
 import Movies from './Components/Movies'
 import Cinemas from './Components/Cinemas'
 import MovieDetails from "./Components/Movie-Details";
-import { Provider } from 'react-redux';
+import { Provider, useDispatch, useSelector } from 'react-redux';
 import configureStore from './React-Redux/store';
 import {UAParser} from 'ua-parser-js';
 //import './Styles/NotFound.css';
@@ -19,12 +19,19 @@ import SignIn from "./Components/Sign up/sigin-in";
 import SelectChair from "./Components/Booking-With-Cinema/select-chair";
 import ContactUs from "./Components/Contact Us/ContactUs";
 import MovieCheckout from "./Components/Payment/movie-checkout";
+import Popcorn from "./Components/popcorn";
+import { useSelect } from "./helper";
+import { getCurrentDateTimeRequested } from "./React-Redux/Actions/get-current-date-time";
+
 
 const store = configureStore();
 
 function App() {
+  // const selector=useSelect(state=>state.currentDateTimeReducer);
+  // const dispatch=useDispatch();
+  // useEffect(()=>{console.log(selector)},[selector])
+  // useEffect(()=>{dispatch(getCurrentDateTimeRequested())},[])
   
-
 
   return (
     <Provider store={store}>
@@ -111,7 +118,13 @@ function App() {
                 path="/contact-us"
                 exact
               />
-                   
+              <Route
+              component={(props) => (
+                <Popcorn{...props} />
+              )}
+              path="/popcorn"
+              exact
+            />    
           </Switch>
 
           <Route render={(props) => <Footer {...props} />} />

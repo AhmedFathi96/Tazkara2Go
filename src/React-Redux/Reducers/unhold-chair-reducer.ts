@@ -1,6 +1,6 @@
 import { reducer, on } from "ts-action";
 import { IChair} from '../../models';
-import { unholdChairSucceeded} from "../Actions/unhold-chair-action";
+import { unholdChairRequested, unholdChairSucceeded} from "../Actions/unhold-chair-action";
 interface Istate{
     chairs: IChair[];
     
@@ -13,6 +13,11 @@ export const unholdChairReducer = reducer<Istate>( {
 },on(unholdChairSucceeded,(state,{payload})=>({
     ...state,
     chairs:[...state.chairs,payload],
+    movie_unhold_chair__is_loading:false
+})),on(unholdChairRequested,(state)=>({
+    ...state,
     movie_unhold_chair__is_loading:true
-}))
+})),
+
+
 )

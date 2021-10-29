@@ -1,5 +1,5 @@
-import { reducer, on, payload } from "ts-action";
-import { loginSucceeded} from "../Actions/login-action"
+import { reducer, on } from "ts-action";
+import { loginRequested, loginSucceeded} from "../Actions/login-action"
 interface Istate{
    res: string;
     
@@ -11,8 +11,12 @@ export const loginReducer = reducer<Istate>( {
     login__is_loading:false
 },on(loginSucceeded,(state,{payload})=>(
   {
-    
+    ...state,
     res:payload,
+    login__is_loading:false
+})),on(loginRequested,(state)=>(
+  {
+    ...state,
     login__is_loading:true
 }))
 )

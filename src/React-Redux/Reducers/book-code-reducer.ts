@@ -1,5 +1,5 @@
 import { reducer, on } from "ts-action";
-import { getBookCodeSucceeded} from "../Actions/get-book-code-action";
+import { getBookCodeRequested, getBookCodeSucceeded} from "../Actions/get-book-code-action";
 interface IState{
     bookCode: string;
     
@@ -9,8 +9,12 @@ export const bookCodeReducer = reducer<IState>( {
     bookCode: "",
     
     bookCode_is_loading:false
-},on(getBookCodeSucceeded,(state,{payload})=>({
+},on(getBookCodeRequested,(state)=>({
     ...state,
-    bookCode:payload
-}))
+    bookCode_is_loading:true
+})),on(getBookCodeSucceeded,(state,{payload})=>({
+    ...state,
+    bookCode:payload,
+    bookCode_is_loading:false
+})),
 )

@@ -1,6 +1,6 @@
 import { reducer, on } from "ts-action";
 import { ICinema } from '../../models';
-import { getCinemasSucceeded } from "../Actions/cinema-action";
+import { getCinemasSucceeded ,getCinemasRequested} from "../Actions/cinema-action";
 interface Istate{
     cinemas: ICinema[];
     cinemas_is_loading:boolean
@@ -12,6 +12,10 @@ export const cinemasReducer = reducer<Istate>( {
     
     ...state,
     cinemas: payload,
+    cinemas_is_loading: false
+})),on(getCinemasRequested ,(state) => ({
+    
+    ...state,
     cinemas_is_loading: true
 }))
 )

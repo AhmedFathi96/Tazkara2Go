@@ -1,7 +1,7 @@
 import { reducer, on } from "ts-action";
 import { IMovie } from '../../models';
-import { getMoviesSucceeded } from "../Actions/get-movies-action";
-import { getCinemaMoviesSucceeded } from "../Actions/get-cinema-movies-action";
+import { getMoviesRequested, getMoviesSucceeded } from "../Actions/get-movies-action";
+import { getCinemaMoviesRequested, getCinemaMoviesSucceeded } from "../Actions/get-cinema-movies-action";
 
 interface Istate{
     movies: IMovie[];
@@ -25,5 +25,11 @@ export const moviesReducer = reducer<Istate>( {
     ...state,
     movies: payload,
     movies_is_loading: false
+})),on(getCinemaMoviesRequested , (state) =>({
+    ...state,
+    movies_is_loading: true
+})),on(getMoviesRequested, (state) =>({
+    ...state,
+    movies_is_loading:true
 }))
 )
