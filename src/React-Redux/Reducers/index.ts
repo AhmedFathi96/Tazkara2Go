@@ -19,6 +19,7 @@ import { userInfoReducer } from './user-info-reducer';
 import { amanReducer } from './aman-reducer';
 import { cardReducer } from './credit-card-reducer';
 import { sanfByStockcodeReducer } from './sanf-by-stockcode-reducer';
+import { currentDateTimeReducer } from './current-date-time-reducer';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const persistAuth: PersistConfig = {
@@ -43,7 +44,8 @@ export const rootReducer = combineReducers({
     userInfoReducer,
     amanReducer,
     cardReducer,
-    sanfByStockcodeReducer
+    sanfByStockcodeReducer,
+    currentDateTimeReducer
 });
 type rootReducer = typeof rootReducer;
 

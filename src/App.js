@@ -20,11 +20,17 @@ import SelectChair from "./Components/Booking-With-Cinema/select-chair";
 import ContactUs from "./Components/Contact Us/ContactUs";
 import MovieCheckout from "./Components/Payment/movie-checkout";
 import Popcorn from "./Components/popcorn";
+import { useSelect } from "./helper";
+import { getCurrentDateTimeRequested } from "./React-Redux/Actions/get-current-date-time";
 
 
 const store = configureStore();
 
 function App() {
+  // const selector=useSelect(state=>state.currentDateTimeReducer);
+  // const dispatch=useDispatch();
+  // useEffect(()=>{console.log(selector)},[selector])
+  // useEffect(()=>{dispatch(getCurrentDateTimeRequested())},[])
   
 
   return (

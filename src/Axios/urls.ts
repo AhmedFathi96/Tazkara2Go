@@ -13,7 +13,7 @@ export const finalDataCardUrl=`https://accept.paymobsolutions.com/api/acceptance
 export const loginUTR = (usermail:string,password:string)=>`http://41.196.0.251:81/Service2.svc/GetUserKey/${usermail}/${password}`;
 export const rgisterUrl=(UserName:string,UserEmail:string,UserPhone:string,UserPassword:string)=>`http://41.196.0.251:81/Service2.svc/AddUser/${UserName}/${UserEmail}/${UserPhone}/${UserPassword}`;
 export const getMoviesUrl = `http://41.196.0.251:81/Service2.svc/getshows`;
-export const getCurrentDateUrl=`http://41.196.0.251:81/Service2.svc/GetCurrentDateTime`;
+export const getCurrentDateTimeUrl=`http://41.196.0.251:81/Service2.svc/GetCurrentDateTime`;
 export const getUserInfoUrl=(userKey:string)=>`http://41.196.0.251:81/Service2.svc/GetUserInfo/${userKey}`;
 export const getCinemasUrl = `http://41.196.0.251:81/Service2.svc/getCinemas`;
 export const getMovieWorkersUrl = (id:string)=>`http://41.196.0.251:81/Service2.svc/GetWorkersByShow/${id}`;

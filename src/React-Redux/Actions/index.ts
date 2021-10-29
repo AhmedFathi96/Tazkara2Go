@@ -76,6 +76,9 @@ export const finalDataCardAction=genericAction(finalDataCard);
 const getSanfByStockCode='GET-Sanf-By-Stockcode';
 
 export const getSanfByStockCodeAction=genericAction(getSanfByStockCode);
+/////
+const getCurrentDateTime='GET-Current-Date-Time';
+export const getCurrentDateTimeAction=genericAction(getCurrentDateTime);
 
 
 
