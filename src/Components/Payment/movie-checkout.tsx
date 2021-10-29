@@ -12,7 +12,7 @@ import { amanReducer } from "../../React-Redux/Reducers/aman-reducer";
 
 const MovieCheckout: React.FC = (props: any) => {
     //const Key:String=localStorage.getItem("userKey")?.toString();
-   const Key=localStorage.getItem("userKey");
+   const Key:string=localStorage.getItem("userKey")?.toString();
     const [paymantType,setpaymantType]=useState("");
     const data = props.history.location.state?.data;
     const [timer, setTimer] = useState<any>();
@@ -52,16 +52,21 @@ const MovieCheckout: React.FC = (props: any) => {
     // console.log("fee",fees,paymantType)
 
     }
+    useEffect(()=>{
+        
+         dispatch(getMoviesRequested());
+     },[])
     
-
     useEffect(()=>{
        console.log(Key)
-       if(Key){
-            dispatch(getUserInfoRequested({userKey:Key}));
-
-        }
-        dispatch(getMoviesRequested());
-    },[])
+             dispatch(getUserInfoRequested({userKey:"16"}));
+ 
+         
+        
+     },[Key])
+    useEffect(()=>{
+     console.log("contact",contactData)
+    },[contactData])
     const dispachPaymentMethod=(v:any)=>{
         console.log(v)
         if(v=='Aman'){
@@ -78,13 +83,11 @@ const MovieCheckout: React.FC = (props: any) => {
     //     dispatch(finalDataAmanRequested({bookCode:data.bookCode,name:contactData.fName,email:contactData.email,phone:contactData.phone,cinemaId:data.cinema.CinemaId,hallId:data.hallId,chairId:data.selectedChairs[0].ChairId,paymentType:paymantType,partyDate:data.showDat,partyId:data.showTimeCode,partyTime:data.timein,showId:movie?.ShowId,expire:data.showTimeCode}))
 
     // },[contactData,paymantType])
-    useEffect(()=>{
-       console.log(selector)
-    },[selector])
+  
    
     useEffect(()=>{
       const mov=movies.find(m=>m.ShowNam==data.showName);
-      console.log(mov)
+      //console.log(mov)
       setMovie(mov)
     },[movies])
     useEffect(()=>{

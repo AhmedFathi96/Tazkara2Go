@@ -3,12 +3,13 @@ import { useDispatch } from "react-redux";
 import { useSelect } from "../../helper";
 import { ISanf } from "../../models";
 import { getSanfByStockCodeRequested } from "../../React-Redux/Actions/get-sanf-by-stockcode-action";
+import GridItem from "./grid-item";
 
 const Popcorn: React.FC = (props: any) => {
 
     const dispatch = useDispatch();
     const [categoryList, setCategoryList] = useState<string[]>();
-    const [allData, setAllData] = useState<ISanf[]>();
+    const [filteredData, setFilteredData] = useState<ISanf[]>();
     const { data } = useSelect(state => state.sanfByStockcodeReducer);
     useEffect(() => {
         dispatch(getSanfByStockCodeRequested({ ip: "62.193.99.221", stockcode: "10" }))
@@ -17,14 +18,15 @@ const Popcorn: React.FC = (props: any) => {
     useEffect(() => {
         const list: string[] = data.map(item => item.categorynamE);
         setCategoryList([...new Set(list)]);
-        setAllData(data)
+        setFilteredData(data)
     }, [data])
-    useEffect(() => {
-        console.log(categoryList)
-    }, [categoryList])
-    const filteredData = (val: string) => {
-        const arr: ISanf[] = data.filter(item => item.categorynamE == val);
-        setAllData(arr)
+    const filterData = (val: string) => {
+        let arr: ISanf[] =[]; 
+        if(val=="all") arr=data;
+        else{arr=data.filter(item => item.categorynamE == val);}
+        
+        console.log("arr",arr)
+        setFilteredData(arr)
 
     }
 
@@ -51,44 +53,13 @@ const Popcorn: React.FC = (props: any) => {
                                     <li data-filter="*" className="active">
                                         all
                                     </li>
-                                    {categoryList?.map((c, i) => <li key={i} data-filter={"." + c} onClick={() => filteredData(c)}>{c}</li>)}
+                                    {categoryList?.map((c, i) => <li key={i} data-filter={`.${c}`} >{c}</li>)}
 
                                 </ul>
                                 <div className="grid-area">
-                                    {allData?.map(c => <div className={"grid-item " + " "+ c.categorynamE}>
-                                        <div className="grid-inner ">
-
-                                            <div className="grid-thumb">
-                                                <img
-                                                    src="./assets/images/movie/popcorn/pop1.png"
-                                                    alt="movie/popcorn"
-                                                />
-                                                <div className="offer-tag">$57</div>
-                                                <div className="offer-remainder">
-                                                    <h6 className="o-title mt-0">24%</h6>
-                                                    <span>off</span>
-                                                </div>
-                                            </div>
-                                            <div className="grid-content">
-                                                <h5 className="subtitle">
-                                                    <a href="#0">Muchaco, Crispy Taco, Bean Burrito</a>
-                                                </h5>
-                                                <form className="cart-button">
-                                                    <div className="cart-plus-minus">
-                                                        <input
-                                                            className="cart-plus-minus-box"
-                                                            type="text"
-                                                            name="qtybutton"
-                                                            defaultValue={2}
-                                                        />
-                                                    </div>
-                                                    <button type="submit" className="custom-button">
-                                                        add
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>)}
+                                    {data?.map((c:ISanf )=> 
+                                        <GridItem sanf={c}/>)
+                                        }
 
                                 </div>
                             </div>
