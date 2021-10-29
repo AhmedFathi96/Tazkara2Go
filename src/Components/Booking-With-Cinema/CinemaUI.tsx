@@ -20,19 +20,37 @@ const CinemaUi=(props:IProps)=> {
     const [cinema] =useState( props.cinema);
     const dispatch=useDispatch();
     const [shows,setShows]=useState<any>();
+    const [vipShows,setVipShows]=useState<any>();
     const [showDate,setShowDate]=useState<any>([]);
+    const [showVipDate,setVipShowDate]=useState<any>([]);
 
     const history = useHistory();
     const {movieSchedule}=useSelect(state=>state.movieScheduleReducer);
 
 
     const [selectedShowTime, setSelectedShowTime] = useState();
+    const [selectedFinalShowTime, setSelectedFinalShowTime] = useState();
+
+
+    const [selectedVipShowTime, setSelectedVipShowTime] = useState();
+
     const [selectedShowDate, setSelectedShowDate] = useState();
+
+    const [selectedFinalShowDate, setSelectedFinalShowDate] = useState();
+
+    const [selectedVipShowDate, setSelectedVipShowDate] = useState();
+
     const [selectedHallId, setSelectedHallId] = useState();
     const [selectedShowTimeCode, setSelectedShowTimeCode] = useState();
     const [selectedCinema, setSelectedCinema] = useState<any>();
+    const [selectedCinemaName, setSelectedCinemaName] = useState<any>();
+
     const [selectedTimeIn, setSelectedTimeIn] = useState();
     const [currentShowDates, setCurrentShowDates] = useState<any[]>([]);
+    const [currentVipShowDates, setVipCurrentShowDates] = useState<any[]>([]);
+
+    const [currentVipShowsLength, setCurrentVipShowsLength] = useState<number>(0);
+    const [currenShowsLength, setCurrentShowsLength] = useState<number>(0);
     useEffect(() => {
         //dispatch(getMovieCinemasRequested({id:id}));
         dispatch(getMoviesRequested());
@@ -91,6 +109,17 @@ const CinemaUi=(props:IProps)=> {
         return ret;
     }
 
+    useEffect(()=>{
+        const currentVip = movieSchedule.filter( (sch:any)=> sch.cinema.CinemaNamA === cinema.CinemaNamA)[0];
+        console.log("currentVip ==========================>",currentVip)
+        const current = movieSchedule.filter( (sch:any)=> sch.cinema.CinemaNamA === cinema.CinemaNamA)[0];
+        console.log("current ==========================>",current);
+        if(currentVip && current){
+            setCurrentShowsLength(current.shows.length);
+            setCurrentVipShowsLength(currentVip.vipShows.length);
+
+        }
+    },[movieSchedule])
     const getDaysArray = (s:any,e:any) => {
         let a:any[] = [];
         let d;
@@ -114,11 +143,21 @@ const CinemaUi=(props:IProps)=> {
             }
         });
 
+        const vipSchedule = movieSchedule.map( sch=>{
+            return{
+                cinema: sch.cinema,
+                times: getShowDates(sch.vipShows)
+            }
+        });
+
         
         setShows(schedule);
-        if(schedule[0] !== undefined && schedule[0].times[0]){
+        setVipShows(vipSchedule);
+        if(schedule[0] !== undefined&&schedule[0].times[0]!== undefined){
             setShowDate(schedule[0].times[0].inBetween);
-
+        }
+        if(vipSchedule[0] !== undefined&&vipSchedule[0].times[0]!== undefined){
+            setVipShowDate(schedule[0].times[0].inBetween);
         }
         //console.log("schedule ========================>", schedule)
     }, [movieSchedule]);
@@ -134,9 +173,10 @@ const CinemaUi=(props:IProps)=> {
                 setSelectedTimeIn(d.timein)
             }
         });
-        setSelectedCinema(currentShow.cinema.CinemaNamA);
+        //setSelectedCinema(currentShow.cinema.CinemaNamA);
         setSelectedCinema(currentShow.cinema)
         setSelectedShowTime(time);
+        setSelectedFinalShowTime(time);
 
     }
     const selectShowDate = (currentShow:any,date:any) =>{
@@ -162,11 +202,54 @@ const CinemaUi=(props:IProps)=> {
         });
 
         setSelectedShowDate(date);
+        setSelectedFinalShowDate(date);
         // console.log("d ==========================>",date);
     }
 
+    const selectVipShowTime = (currentShow:any,time:any) =>{
+        vipShows.forEach((sh:any) => {
+            if(sh.cinema.CinemaNamA === currentShow.cinema.CinemaNamA ){
+                const d = sh.times.filter((ti:any) => ti.showTime === time)[0]
+                //console.log("d ==========================>",d);
+                setSelectedHallId(d.hallid);
+                setVipShowDate(d.inBetween);
+                setSelectedShowTimeCode(d.ShowTimeCod);
+                setSelectedTimeIn(d.timein)
+            }
+        });
+        //setSelectedCinema(currentShow.cinema.CinemaNamA);
+        setSelectedCinema(currentShow.cinema)
+        setSelectedVipShowTime(time);
+        setSelectedFinalShowTime(time);
+    }
+    const selectVipShowDate = (currentShow:any,date:any) =>{
+        // console.log("d ==========================>",shows);
+
+        vipShows.forEach((sh:any) => {
+            if(sh.cinema.CinemaNamA === currentShow.cinema.CinemaNamA ){
+                const d = sh.times.map((ti:any) =>{
+                    const da = ti.inBetween.find((ins:any)=> ins === date);
+                    if(da){
+                        return{
+                            ...ti
+                        }
+                    }
+                })
+                console.log("d ==========================>",d);
+                setVipCurrentShowDates(d);
+                // setSelectedHallId(d.hallid);
+                // setShowDate(d.inBetween);
+                // setSelectedShowTimeCode(d.ShowTimeCod);
+                // setSelectedTimeIn(d.timein)
+            }
+        });
+
+        setSelectedVipShowDate(date);
+        setSelectedFinalShowDate(date);
+        // console.log("d ==========================>",date);
+    }
     useEffect(()=>{
-        if(selectedShowDate&&selectedShowTime&&selectedCinema){
+        if(selectedFinalShowDate&&selectedFinalShowTime&&selectedCinema){
         
         
             history.push({
@@ -175,45 +258,82 @@ const CinemaUi=(props:IProps)=> {
                     data: {
                         showName:props.movie.ShowNam,
                         cinema:selectedCinema,
-                        showDat:selectedShowDate,
+                        showDat:selectedFinalShowDate,
                         showTimeCode:selectedShowTimeCode,
                         hallId:selectedHallId,
                         timein:selectedTimeIn
                     } }
             });
         }
-    },[selectedShowDate, selectedShowTime , selectedCinema])
+    },[selectedFinalShowDate, selectedFinalShowTime , selectedCinema])
     return (
-        (
-            shows?
-            shows.map((show:any)=>
         
-            <li  style={{'display':'flex', 'alignItems':'center'}}>
-                <div className="movie-name">
-                    {show.isVip == "1"?<span>Vip</span>:<></>}
-                    <a href={cinema.location} className="name" target='blank'>{show.cinema.CinemaNamA} - {show.cinema.CinemaNamE}</a>
-                
-                </div>
-                <div className="movie-schedule middle">
-                    {
-                        showDate&&showDate.map((item:any)=><div className={`item ${selectedShowDate === item?'selected':'unselected'}`} onClick={()=>selectShowDate(show,item)}>{item}</div>)
-                    }
-                
-                
-                
-                </div>
-                <div className="movie-schedule">
-                    {
-                        currentShowDates&&currentShowDates.map((item:any)=><div className={`item ${selectedShowTime === item.showTime?'selected':'unselected'}`} onClick={()=>selectShowTime(show,item.showTime)} >{item.showTime}</div>)
-                    }
-                
-                </div>
-            </li>
-            )
-            :
-            <></>
+            <>
+            {
+                (shows && currenShowsLength !== 0)?
+                shows.map((show:any)=>
+
+                <li  style={{'display':'flex', 'alignItems':'center'}}>
+                    <div className="movie-name">
+                        <a href={cinema.location} className="name" target='blank'>{show.cinema.CinemaNamA} - {show.cinema.CinemaNamE}</a>
+                    
+                    </div>
+                    <div className="movie-schedule middle">
+                        {
+                            showDate&&showDate.map((item:any)=><div className={`item ${(selectedShowDate === item&& selectedCinemaName === show.cinema.CinemaNamA)?'selected':'unselected'}`} onClick={()=>{selectShowDate(show,item) ; setSelectedCinemaName(show.cinema.CinemaNamA)}}>{item}</div>)
+                        }
+                    
+                    
+                    
+                    </div>
+                    <div className="movie-schedule">
+                        {
+                            currentShowDates&&currentShowDates.map((item:any)=><div className={`item ${(selectedShowTime === item.showTime && selectedCinemaName === show.cinema.CinemaNamA)?'selected':'unselected'}`} onClick={()=>{selectShowTime(show,item.showTime); setSelectedCinemaName(show.cinema.CinemaNamA)}} >{item.showTime}</div>)
+                        }
+                    
+                    </div>
+                </li>
+                )
+                :
+                <></>
+            }
+            <br />
+            {
+                (vipShows && currentVipShowsLength !== 0)?
+                vipShows.map((show:any)=>
+
+                <li  style={{'display':'flex', 'alignItems':'center'}}>
+                    <div className="movie-name">
+                    <div className="movie-schedule middle">
+                        <div className={`item selected aaa`}>VIP Show</div>
+                    </div>
+                        <a href={cinema.location} className="name" target='blank'>{show.cinema.CinemaNamA} - {show.cinema.CinemaNamE}</a>
+                    
+                    </div>
+                    <div className="movie-schedule middle">
+                        {
+                            showVipDate&&showVipDate.map((item:any)=><div className={`item ${(selectedVipShowDate === item && selectedCinemaName === show.cinema.CinemaNamA)?'selected':'unselected'}`} onClick={()=>{selectVipShowDate(show,item); setSelectedCinemaName(show.cinema.CinemaNamA)}}>{item}</div>)
+                        }
+                    
+                    
+                    
+                    </div>
+                    <div className="movie-schedule">
+                        {
+                            currentVipShowDates&&currentVipShowDates.map((item:any)=><div className={`item ${(selectedVipShowTime === item.showTime && selectedCinemaName === show.cinema.CinemaNamA)?'selected':'unselected'}`} onClick={()=>{selectVipShowTime(show,item.showTime); setSelectedCinemaName(show.cinema.CinemaNamA)}} >{item.showTime}</div>)
+                        }
+                    
+                    </div>
+                </li>
+                )
+                :
+                <></>
+            }
             
-        )
+            </>
+        
+            
+        
         
     );
 };

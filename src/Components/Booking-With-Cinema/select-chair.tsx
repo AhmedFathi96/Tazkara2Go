@@ -27,9 +27,7 @@ const SelectChair: React.FC = (props:any) => {
 
   const [maxChair,setMaxChair]=useState<any>({maxColNumber:0,maxRowNumber:0});
 
-  useEffect( ()=>{
-    console.log("bookCode ============================>",bookCode)
-  },[bookCode])
+
 
   useEffect(() => {
 
@@ -174,7 +172,8 @@ const SelectChair: React.FC = (props:any) => {
                         timein:data.timein,
                         timer:timeLeft,
                         selectedChairs:selectedChairs,
-                        chairsTotalPrice:chairsTotalPrice
+                        chairsTotalPrice:chairsTotalPrice,
+                        bookCode:bookCode
               } }
       });
   }
@@ -221,21 +220,31 @@ const SelectChair: React.FC = (props:any) => {
   }
     return(
         <>
-            <section className="page-title bg-one">
+            <section className="bg-one">
+              <section className="details-banner hero-area bg_img seat-plan-banner" data-background="/assets/images/banner/banner04.jpg">
                 <div className="container">
-                  <br/><br/><br/>
-                    <div className="page-title-area">
-                        <div className="item md-order-1">
-                            <a href="movie-ticket-plan.html" className="custom-button back-button">
-                                <i className="flaticon-double-right-arrows-angles"></i>back
-                            </a>
-                        </div>
-                        <div className="item">
-                            <h5 className="title">{timer}</h5>
-                            <p>Mins Left</p>
+                    <div className="details-banner-wrapper">
+                        <div className="details-banner-content style-two">
+                            <h3 className="title">{data.cinema.CinemaNamE}</h3>
+                          
                         </div>
                     </div>
                 </div>
+              </section>
+                <div className="container">
+                      <div className="page-title-area">
+                          <div className="item md-order-1">
+                              <a href="movie-ticket-plan.html" className="custom-button back-button">
+                                  <i className="flaticon-double-right-arrows-angles"></i>back
+                              </a>
+                          </div>
+                          <div className="item">
+                              <h5 className="title">{timer}</h5>
+                              <p>Mins Left</p>
+                          </div>
+                      </div>
+                  </div>
+                  
             </section>
 
           <section style={{marginTop:"50px"}}>

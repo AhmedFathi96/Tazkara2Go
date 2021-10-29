@@ -1,46 +1,170 @@
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useSelect } from "../../helper";
+import { IMovie } from "../../models";
+import { getData00Requested } from "../../React-Redux/Actions/common-payment-actions";
+import { getMoviesRequested } from "../../React-Redux/Actions/get-movies-action";
+import { getUserInfoRequested } from "../../React-Redux/Actions/get-user-info-action";
+import { loginRequested } from "../../React-Redux/Actions/login-action";
+import { finalDataAmanRequested } from "../../React-Redux/Actions/payByAman-action";
+import { finalDataCardRequested } from "../../React-Redux/Actions/payByCard-action";
+import { amanReducer } from "../../React-Redux/Reducers/aman-reducer";
 
-interface IContact{
-    FullName:string,
-    Email:string,
-    Phone:string
-    
-}
-
-const MovieCheckout:React.FC = (props:any) => {
-    const data=props.history.location.state?.data;
+const MovieCheckout: React.FC = (props: any) => {
+    //const Key:String=localStorage.getItem("userKey")?.toString();
+    const Key=localStorage.getItem("userKey");
+    const [paymentType,setPaymentType]=useState("");
+    const data = props.history.location.state?.data;
     const [timer, setTimer] = useState<any>();
     const [timeLeft, setTimeLeft] = useState(data.timer);
+    const [contactData, setContactData] = useState({ fName: "", email: "", phone: "" });
+    const [movie,setMovie]=useState<IMovie>({});
+    const {movies}=useSelect(state=>state.moviesReducer);
+    const {info}=useSelect(state=>state.userInfoReducer);
+    const [fees,setFees]=useState(data.cinema.VisaExpence);
+    const [expire,setExpire]=useState(data.cinema.visaWaitingMinutes);
+    const dispatch = useDispatch();
+    const selector=useSelect(state=>amanReducer)
+    const handleContactData = (e: any) => {
+        const { name, value } = e.target;
+        setContactData(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+        console.log(contactData)
+    };
+    const setPaymentData=(val:string)=>{
+        console.log("val ============================>",val)
+        if(val === 'Aman'){
+            const fee= data.cinema.AmanExpence;
+            const exp=data.cinema.amanWaitingMinutes-1;
+            setPaymentType('Aman')
+            setFees(fee);
+            setExpire(exp.toString())
+        }else{
+            const fee= data.cinema.VisaExpence;
+            const exp=data.cinema.visaWaitingMinutes-1;
+            setPaymentType('Card')
+            setFees(fee);
+            setExpire(exp.toString())
+
+        }
+    // console.log("fee",fees,paymantType)
+
+    }
     
+    useEffect(()=>{
+        console.log("data ===================>",data)
+    },[data]);
+
+    useEffect(()=>{
+        console.log(Key)
+        if(Key){
+                dispatch(getUserInfoRequested({userKey:Key}));
+
+        }
+        dispatch(getMoviesRequested());
+    },[])
+    const dispachPaymentMethod=(v:any)=>{
+        console.log(v);
+        const  d = new Date(data.showDat);
+        const datestring =    d.getFullYear() + "-" + (d.getMonth()+1) + "-" + d.getDate();
+        // ${bookCode}/${name}/${email}/${phone}/${cinemaId}/${hallId}/${chairId}/${paymentType}/${partyDate}/${partyId}/${partyTime}/${showId}/${expire}
+        //    http://41.196.0.251:81/Service2.svc/AddBookingDetails/2110290000022/Ahmed%20Fathi/ahmedfathimohamed96@gmail.com/01009839804/6/5/75//2021-10-31/16/10xxx30%20AM/95/25 404 (Not Found)
+        if(v==='Aman'){
+        dispatch(finalDataAmanRequested({
+            bookCode:data.bookCode,
+            name:contactData.fName,
+            email:contactData.email,
+            phone:contactData.phone,
+            cinemaId:data.cinema.CinemaId,
+            hallId:data.hallId,
+
+            chairId:data.selectedChairs[0].ChairId,
+            amount: data.chairsTotalPrice.toString(),
+            expireTime:expire,
+            paymentType:v,
+            partyDate:datestring,
+            partyId:data.showTimeCode,
+            partyTime:data.timein.replace(":","xxx"),
+            showId:movie.ShowId, 
+            expire
+            }))
+
+        }else{
+        dispatch(finalDataCardRequested({
+            bookCode:data.bookCode,
+            name:contactData.fName,
+            email:contactData.email,
+            phone:contactData.phone,
+            cinemaId:data.cinema.CinemaId,
+            hallId:data.hallId,
+            amount: data.chairsTotalPrice.toString(),
+            expireTime:expire,
+            chairId:data.selectedChairs[0].ChairId,
+            paymentType:v,
+            partyDate:datestring,
+            partyId:data.showTimeCode,
+            partyTime:data.timein.replace(":","xxx"),
+            showId:movie.ShowId,
+            expire}))
+
+
+        }
+
+    }
+    // useEffect(()=>{
+    //     dispatch(finalDataAmanRequested({bookCode:data.bookCode,name:contactData.fName,email:contactData.email,phone:contactData.phone,cinemaId:data.cinema.CinemaId,hallId:data.hallId,chairId:data.selectedChairs[0].ChairId,paymentType:paymantType,partyDate:data.showDat,partyId:data.showTimeCode,partyTime:data.timein,showId:movie?.ShowId,expire:data.showTimeCode}))
+
+    // },[contactData,paymantType])
+    useEffect(()=>{
+       console.log(selector)
+    },[selector])
+   
+    useEffect(()=>{
+      const mov=movies.find(m=>m.ShowNam==data.showName);
+      console.log(mov)
+      setMovie(mov)
+    },[movies])
+    useEffect(()=>{
+        if(info[0])
+      {  console.log("info",info[0])
+        setContactData({fName:info[0].UserName,email:info[0].UserEmail,phone:info[0].UserPhone})}
+    },[info])
+    
+    
+  
+
     useEffect(() => {
-      // exit early when we reach 0
-        if (!timeLeft){
-        
+        // exit early when we reach 0
+        if (!timeLeft) {
+
             return;
         };
 
-      // save intervalId to clear the interval when the
-      // component re-renders
+        // save intervalId to clear the interval when the
+        // component re-renders
         const intervalId = setInterval(() => {
             setTimeLeft(timeLeft - 1);
-            let minutes = Math.floor((timeLeft - 1 ) / 60); // get minutes
-            let seconds = timeLeft - 1 -  (minutes * 60); //  get seconds
-            setTimer("0"+minutes+":"+seconds)
+            let minutes = Math.floor((timeLeft - 1) / 60); // get minutes
+            let seconds = timeLeft - 1 - (minutes * 60); //  get seconds
+            setTimer("0" + minutes + ":" + seconds)
         }, 1000);
 
-      // clear interval on re-render to avoid memory leaks
+        // clear interval on re-render to avoid memory leaks
         return () => clearInterval(intervalId);
-      // add timeLeft as a dependency to re-rerun the effect
-      // when we update it
     }, [timeLeft]);
 
     return (
         <>
+        <section>
+            
+        </section>
 
             {/* ==========Banner-Section========== */}
             <section
                 className="details-banner hero-area bg_img seat-plan-banner"
-                data-background="./assets/images/banner/banner04.jpg"
+
             >
                 <div className="container">
                     <div className="details-banner-wrapper">
@@ -48,7 +172,7 @@ const MovieCheckout:React.FC = (props:any) => {
                             <h3 className="title">{data.showName}</h3>
                             <div className="tags">
                                 <a href="#0">{data.cinema.CinemaNamE}</a>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -60,6 +184,7 @@ const MovieCheckout:React.FC = (props:any) => {
                 <div className="container">
                     <div className="page-title-area">
                     
+
                         <div className="item">
                             <h5 className="title">{timer}</h5>
                             <p>Mins Left</p>
@@ -73,111 +198,84 @@ const MovieCheckout:React.FC = (props:any) => {
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-8">
-                            
-                            <div className="checkout-widget checkout-contact">
+                           {!Key&& <div className="checkout-widget d-flex flex-wrap align-items-center justify-cotent-between">
+                                <div className="title-area">
+                                    <h5 className="title">Already a Tazkara2Go Member?</h5>
+                                    <p>Sign in to earn points and make booking easier!</p>
+                                </div>
+                                <a href="/sign-in" className="sign-in-area">
+                                    <i className="fas fa-user" />
+                                    <span>Sign in</span>
+                                </a>
+                            </div>}
+
+                          {!Key&&  <div className="checkout-widget checkout-contact">
                                 <h5 className="title">Share your Contact Details </h5>
                                 <form className="checkout-contact-form">
                                     <div className="form-group">
-                                        <input type="text" placeholder="Full Name" />
+                                        <input type="text" name="fName" placeholder="Full Name" onChange={handleContactData} />
                                     </div>
                                     <div className="form-group">
-                                        <input type="text" placeholder="Enter your Mail" />
+                                        <input type="text" name="email" placeholder="Enter your Mail" onChange={handleContactData} />
                                     </div>
                                     <div className="form-group">
-                                        <input type="text" placeholder="Enter your Phone Number " />
+                                        <input type="text" name="phone" placeholder="Enter your Phone Number " onChange={handleContactData} />
                                     </div>
-                                    <div className="form-group">
-                                        <input
-                                            type="submit"
-                                            defaultValue="Continue"
-                                            className="custom-button"
-                                        />
-                                    </div>
+
                                 </form>
-                            </div>
-                            <div className="checkout-widget checkout-contact">
+
+                            </div>}
+                            <div className="checkout-widget checkout-contact d-none">
                                 <h5 className="title">Promo Code </h5>
                                 <form className="checkout-contact-form">
                                     <div className="form-group">
                                         <input type="text" placeholder="Please enter promo code" />
                                     </div>
-                                    <div className="form-group">
-                                        <input
-                                            type="submit"
-                                            defaultValue="Verify"
-                                            className="custom-button"
-                                        />
-                                    </div>
+
                                 </form>
                             </div>
-                            <div className="checkout-widget checkout-card mb-0">
+                            <div className="checkout-widget checkout-card mb-0 ">
                                 <h5 className="title">Payment Option </h5>
                                 <ul className="payment-option nav nav-pills mb-3" id="pills-tab" role="tablist">
                                     <li className="nav-item" >
-                                        <a className="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">
-                                            <img src={process.env.PUBLIC_URL +"/assets/images/payment/card.png"} alt="payment" />
+                                        <a className="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true" onClick={()=>setPaymentData('Card')}  >
+                                           
+                                            <img src={process.env.PUBLIC_URL + "/assets/images/payment/card.png"} alt="payment" />
                                             <span>Credit Card</span>
+                                           
                                         </a>
                                     </li>
                                     <li className=" nav-item">
-                                        <a className="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">
-                                            <img src={process.env.PUBLIC_URL +"/assets/images/payment/card.png"} alt="payment" />
+                                        <a className="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false" onClick={()=>setPaymentData('Aman')}>
+                                            <img src={process.env.PUBLIC_URL + "/assets/images/payment/card.png"} alt="payment" />
                                             <span>Aman-Masary</span>
                                         </a>
                                     </li>
                                 
-                                </ul>
-                                <div className="tab-content" id="pills-tabContent">
-                                <div className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                                <h6 className="subtitle">Enter Your Card Details </h6>
-                                <form className="payment-card-form">
-                                    <div className="form-group w-100">
-                                        <label htmlFor="card1">Card Details</label>
-                                        <input type="text" id="card1" />
-                                        <div className="right-icon">
-                                            <i className="flaticon-lock" />
-                                        </div>
-                                    </div>
-                                    <div className="form-group w-100">
-                                        <label htmlFor="card2"> Name on the Card</label>
-                                        <input type="text" id="card2" />
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="card3">Expiration</label>
-                                        <input type="text" id="card3" placeholder="MM/YY" />
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="card4">CVV</label>
-                                        <input type="text" id="card4" placeholder="CVV" />
-                                    </div>
-                                    <div className="form-group check-group">
-                                        <input id="card5" type="checkbox" defaultChecked />
-                                        <label htmlFor="card5">
-                                            <span className="title">QuickPay</span>
-                                            <span className="info">
-                                                Save this card information to my Boleto account and make
-                                                faster payments.
-                                            </span>
-                                        </label>
-                                    </div>
-                                    <div className="form-group">
-                                        <input
-                                            type="submit"
-                                            className="custom-button"
-                                            defaultValue="make payment"
-                                        />
-                                    </div>
-                                </form>
-                                </div>
-                                <div className="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                                    <h1>gggggggg</h1>
-                                </div>
 
-                                <p className="notice">
-                                    By Clicking "Make Payment" you agree to the{" "}
-                                    <a href="#0">terms and conditions</a>
-                                </p>
-                            </div>
+                                </ul>
+                                <div className="tab-content " id="pills-tabContent">
+                                   {(contactData.email && contactData.phone && contactData.fName)?  <div className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                                        <h6 className="subtitle">Enter Your Card Details </h6>
+                                        <h6>Email: {contactData.email}</h6><br />
+                                        <h6>Full Name: {contactData.fName}</h6><br />
+                                        <h6>Phone: {contactData.phone}</h6><br />
+                                        <h6>Payment Option: Credit-Card</h6><br />
+                                        <a type="button" className="custom-button back-button" onClick={()=>dispachPaymentMethod('Card')}> confirm payment</a>
+                                    </div> : <div className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">plz enter your contact data first to pay by Credit Card</div>}
+                                    {(contactData.email && contactData.phone && contactData.fName)? <div className="tab-pane fade " id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" >
+                                        <h6>Email: {contactData.email}</h6><br />
+                                        <h6>Full Name: {contactData.fName}</h6><br />
+                                        <h6>Phone: {contactData.phone}</h6><br />
+                                        <h6>Payment Option: Aman-Masary</h6><br />
+                                        <a type="button" className="custom-button back-button" onClick={()=>dispachPaymentMethod('Aman')}> confirm payment</a>
+                                    </div> : <div className="tab-pane fade " id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">plz enter your contact data first to pay Aman-Masary</div>}
+
+                                    <p className="notice">
+                                        By Clicking "Make Payment" you agree to the{" "}
+                                        <a href="#0">terms and conditions</a>
+                                    </p>
+                                </div>
                             </div>
                         </div>
                         <div className="col-lg-4">
@@ -186,13 +284,13 @@ const MovieCheckout:React.FC = (props:any) => {
                                 <ul>
                                     <li>
                                         <h6 className="subtitle">{data.showName}</h6>
-                                        
+
                                     </li>
                                     <li>
                                         <h6 className="subtitle">
                                             <span>{data.cinema.CinemaNamE}</span>
                                             <span className="info">{data.hallId}</span>
-                                            
+
                                         </h6>
                                         <div className="info">
                                             <span>{data.showDat}, {data.timein}</span> <span>Tickets</span>
@@ -201,7 +299,13 @@ const MovieCheckout:React.FC = (props:any) => {
                                     <li>
                                         <h6 className="subtitle mb-0">
                                             <span>Tickets Price</span>
-                                            <span>$ {data.chairsTotalPrice}</span>
+                                            <span>{data.chairsTotalPrice}</span>
+                                            
+                                        </h6><br/>
+                                        <h6 className="subtitle mb-0">
+                                            <span>Fees</span>
+                                            <span>{fees}</span>
+                                            
                                         </h6>
                                     </li>
                                 </ul>
@@ -216,6 +320,7 @@ const MovieCheckout:React.FC = (props:any) => {
                                         </span>
                                     </li>
                                 
+
                                 </ul>
                                 <ul>
                                     <li>
@@ -233,11 +338,9 @@ const MovieCheckout:React.FC = (props:any) => {
                             <div className="proceed-area  text-center">
                                 <h6 className="subtitle">
                                     <span>Amount Payable</span>
-                                    <span>$ {data.chairsTotalPrice}</span>
+                                    <span>$ {parseFloat(data.chairsTotalPrice)+parseFloat(fees) }</span>
                                 </h6>
-                                <a href="#0" className="custom-button back-button">
-                                    proceed
-                                </a>
+                              
                             </div>
                         </div>
                     </div>

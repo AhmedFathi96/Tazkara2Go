@@ -14,7 +14,7 @@ function* holdChairSaga(action:typeof actionType.actions) {
         const payload = action.payload;
        // //console.log(payload)
         const res : AxiosResponse= yield call(holdChair,payload.CinemaIpAdress,payload.ShowTimeCod,payload.hallId,payload.ShowDate,payload.ChairId,payload.ChairPrice,payload.bookcode,payload.holdWaitingMinutes,payload.ShowName,payload.timein);
-      //  //console.log("saga times",res.data)
+      console.log("saga times",res.data)
         
         yield put(holdChairSucceeded(res.data));
     } catch (e) {

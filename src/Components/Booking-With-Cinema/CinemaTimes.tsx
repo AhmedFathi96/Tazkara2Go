@@ -15,7 +15,7 @@ const CinemaTimes:React.FC = (props:any) => {
     const id=props.match.params.id;
     const dispatch=useDispatch();
     const [movie,setMovie] = useState<IMovie>();
-
+    const [imageId, setImageId] = useState(id);
     const {movies}=useSelect(state=>state.moviesReducer);
     
     const {cinemas}=useSelect(state=>state.movieCinemasReducer);
@@ -34,12 +34,10 @@ const CinemaTimes:React.FC = (props:any) => {
             dispatch(getMovieScheduleRequested({showName:selectedMovie.ShowNam}))
 
         }
-    
+        setImageId(props.match.params.id);
     }, [movies,cinemas]);
 
-    useEffect(() => {
-        //console.log("movie , cinemas ===================>",movie,cinemas)
-    }, [movies,cinemas]);
+    
     return(
         <>
         
@@ -55,7 +53,7 @@ const CinemaTimes:React.FC = (props:any) => {
                     <h6 className="subtitle">Welcome! </h6>
                     <h4 className="title">Select Your Seats</h4>
                     <div className="thumb">
-                        <img src={"http://www.tazkara2go.com:805/images/showimages/" + id + ".jpg"} alt="movie" />
+                        <img src={"http://www.tazkara2go.com:805/images/showimages/" + imageId + ".jpg"} alt="movie" />
                     </div>
                     <a href="movie-seat-plan.html" className="custom-button seatPlanButton">Seat Plans<i className="fas fa-angle-right"></i></a>
                 </div>

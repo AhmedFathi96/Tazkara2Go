@@ -1,5 +1,5 @@
 export interface IMovie{
-    ShowId?:string;
+    ShowId:string;
     ShowNam: string;
     ShowTypCod: string;
     LangCod: string;
@@ -36,15 +36,30 @@ export interface ITimeItem{
     rowsNo: string
       
 }
-interface AxiosResponse{
-    data?:any;
-}
-export interface ICinema{
+
+export interface ICinema {
     CinemaId?: string;
-    CinemaNamA: string,
-    CinemaNamE: string,
-    IpAdress:string,
-    location:string
+    CinemaNamA: string;
+
+    CinemaNamE: string;
+    IpAdress: string;
+
+    Phone: string;
+    SanfQuantity: string;
+    StockCod: string;
+    UpdateDate: string;
+    VisaExpence: string;
+    amanWaitingMinutes: string;
+    boxBookingDisableFrom: string;
+    boxBookingDisableTo: string;
+    boxWaitingMinutes: string;
+    cafeteriaExpence: string;
+    cafeteriaExpenceType: string;
+    cafeteriaIsActive: string;
+    holdWaitingMinutes: string;
+    isBoxBookingEnabled: string;
+    location: string;
+    visaWaitingMinutes: string
 }
 export interface IChair{
     ChairId: string;
@@ -55,4 +70,22 @@ export interface IChair{
     ChairPrice: string;
     ChairStatCod: string;
     selected:boolean;
+}
+export interface ILogin{
+    usermail:string;
+    password:string;
+    history:any;
+
+}
+export interface IRegister{
+    UserName:string;
+    UserEmail:string;
+    UserPhone:string;
+    UserPassword:string
+}
+export interface IUserInfo{
+    UserName:string;
+    UserEmail:string;
+    UserPhone:string;
+   
 }

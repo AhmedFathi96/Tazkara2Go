@@ -17,9 +17,7 @@ import CinemaTimes from "./Components/Booking-With-Cinema/CinemaTimes.tsx";
 import SignUp from "./Components/Sign up/sign-up";
 import SignIn from "./Components/Sign up/sigin-in";
 import SelectChair from "./Components/Booking-With-Cinema/select-chair";
-
 import ContactUs from "./Components/Contact Us/ContactUs";
-import { getMovieCinemaTimesRequested } from "./React-Redux/Actions/get-movie-cinema-times-action";
 import MovieCheckout from "./Components/Payment/movie-checkout";
 
 const store = configureStore();

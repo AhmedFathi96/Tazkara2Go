@@ -44,4 +44,34 @@ export const getUnAvialableChairsAction=genericAction(getUnAvialableChairs);
 ////unhold chairs
 const unholdChairs='Unhold-Chairs';
 export const unholdChairsAction=genericAction(unholdChairs);
+////login
+const login="Login";
+export const loginAction=genericAction(login);
+////register
+const register ="Register";
+export const registerAction=genericAction(register);
+////user info
+const getUserInfo="GET-User-Info";
+export const getUserInfoAction=genericAction(getUserInfo);
+//// common Payment actions
+const getData00='GET-Data00';
+export const getData00Action=genericAction(getData00);
+const data="DATA";
+export const dataAction=genericAction(data);
+const dataOrder='Data-Order';
+export const dataOrderAction=genericAction(dataOrder);
+const data1='DATA1';
+export const data1Action=genericAction(data1);
+////Aman
+const updateCinemaAman='Update-Cinema-Aman';
+export const updateCinemaAmanAction=genericAction(updateCinemaAman);
+const finalDataAman='Final-Data-Aman';
+export const finalDataAmanAction=genericAction(finalDataAman);
+////card
+const updateCinemaCard='Update-Cinema-Card';
+export const updateCinemaCardAction=genericAction(updateCinemaCard);
+const finalDataCard='Final-Data-Card';
+export const finalDataCardAction=genericAction(finalDataCard);
+
+
 

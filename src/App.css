@@ -176,3 +176,13 @@
 .selected{
   background: #31d7a9 !important;
 }
+.page-title-area {
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  margin: auto;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100px;
+}

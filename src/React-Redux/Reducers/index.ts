@@ -13,6 +13,11 @@ import { hallChairsReducer } from './hall-chairs-reducer';
 import { PersistConfig,persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { bookCodeReducer } from './book-code-reducer';
+import { loginReducer } from './login-reducer';
+import { registerReducer } from './register-reducer';
+import { userInfoReducer } from './user-info-reducer';
+import { amanReducer } from './aman-reducer';
+import { cardReducer } from './credit-card-reducer';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const persistAuth: PersistConfig = {
@@ -31,7 +36,12 @@ export const rootReducer = combineReducers({
     hallChairsReducer,
     unAvailableChairsReducer,
     holdChairReducer,
-    unholdChairReducer
+    unholdChairReducer,
+    loginReducer,
+    registerReducer,
+    userInfoReducer,
+    amanReducer,
+    cardReducer
 });
 type rootReducer = typeof rootReducer;
 
