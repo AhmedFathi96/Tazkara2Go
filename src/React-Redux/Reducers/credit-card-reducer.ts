@@ -2,18 +2,18 @@ import { reducer, on } from "ts-action";
 import { getData00Succeeded } from "../Actions/common-payment-actions";
 import { finalDataCardRequested, finalDataCardSucceeded } from "../Actions/payByCard-action";
 interface IState{
-   res:any,
-   is_aman_payment_loading:boolean
+    credit_card_key:any,
+    is_aman_payment_loading:boolean
 }
 export const cardReducer = reducer<IState>( {
-    res:{},
+  credit_card_key:"",
 
   is_aman_payment_loading:false
     
   
 },on(finalDataCardSucceeded,(state,{payload})=>({
     ...state,
-    res:payload,
+    credit_card_key:payload,
     is_aman_payment_loading:false
 
    

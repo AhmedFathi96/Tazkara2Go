@@ -157,6 +157,7 @@ const SelectChair: React.FC = (props:any) => {
 
   }
   const goToPayment=()=>{
+    console.log("goToPayment ================>",data)
     if(data){
         
         
@@ -164,7 +165,8 @@ const SelectChair: React.FC = (props:any) => {
           pathname:`/movie-checkout`,
           state: { 
               data: {
-                  showName:data.showName,
+                        movie:data.movie,
+                        showName:data.showName,
                         cinema:data.cinema,
                         showDat:data.showDat,
                         showTimeCode:data.showTimeCode,

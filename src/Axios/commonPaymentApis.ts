@@ -1,9 +1,9 @@
 import axios from 'axios';
 import * as Requests from './urls'
 
-export const getData00 = (bookCode:string,name:string,email:string,phone:string,cinemaId:string,hallId:string,chairId:string,paymentType:string,partyDate:string,partyId:string,partyTime:string,showId:string,expire:string) =>{
-    
-    return axios.get(Requests.getData00Url(bookCode,name,email,phone,cinemaId,hallId,chairId,paymentType,partyDate,partyId,partyTime,showId,expire));
+export const getData00 = (bookCode:string,name:string,email:string,phone:string,cinemaId:string,hallId:string,chairId:string,paymentType:string,partyDate:string,partyId:string,partyTime:string,showId:string,expire:string,ticketquantity:string,ticketprice:string,ticketfees:string) =>{
+      console.log("====>",bookCode,name,email,phone,cinemaId,hallId,chairId,paymentType,partyDate,partyId,partyTime,showId,expire,ticketquantity,ticketprice,ticketfees)
+    return axios.get(Requests.getData00Url(bookCode,name,email,phone,cinemaId,hallId,chairId,paymentType,partyDate,partyId,partyTime,showId,expire,ticketquantity,ticketprice,ticketfees));
 
 }
 
@@ -26,7 +26,7 @@ export const dataKey=(token1:string,amount:string,id:string,email:string,name:st
     return axios.post(Requests.data1KeyUrl,
        JSON.stringify({
             "auth_token": token1,
-            "amount_cents": amount,
+            "amount_cents": Number.parseInt(amount)*100,
             "expiration": 3600,
             "order_id": id,
             "billing_data": {

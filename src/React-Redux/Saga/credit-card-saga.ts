@@ -14,9 +14,9 @@ function* cardPaymentSaga(action:typeof actionType.actions) {
     try {
         const payload = action.payload;
         console.log(payload)
-        const data00: AxiosResponse=yield call(getData00,payload.bookCode,payload.name,payload.email,payload.phone,payload.cinemaId,payload.hallId,payload.chairId,payload.paymentType,payload.partyDate,payload.partyId,payload.partyTime,payload.showId,payload.expire)
+        const data00: AxiosResponse=yield call(getData00,payload.bookCode,payload.name,payload.email,payload.phone,payload.cinemaId,payload.hallId,payload.chairId,payload.paymentType,payload.partyDate,payload.partyId,payload.partyTime,payload.showId,payload.expire,payload.ticketquantity,payload.ticketprice,payload.ticketfees);
        // const res : AxiosResponse= yield call(finalDataAman,payload.finalToken);
-        if (data00.data.AddBookingDetailsResult == "success") {
+        if (data00.data.AddBookingDetailsResult === "success") {
             const data:AxiosResponse=yield call(dataAuth);
             const token0:string = data.data.token;
             
@@ -24,10 +24,11 @@ function* cardPaymentSaga(action:typeof actionType.actions) {
             const id:string= dataOrd.data.id;
             const token1 :string= dataOrd.data.token;
         // token1:string,amount:string,id:string,email:string,name:string,phone:string,startIndex:number
-            const finalDataCardRes:AxiosResponse=yield call(finalDataCard,token1,payload.amount,id,payload.email,payload.name.indexOf(" "),payload.phone,payload.name)
+            const finalDataCardRes:AxiosResponse=yield call(finalDataCard,token0,payload.amount,id,payload.email,payload.name.indexOf(" "),payload.phone,payload.name)
             const finalToken:string = finalDataCardRes.data.token;
-            const updateCinemaCardRes:AxiosResponse=yield call(updateCinemaCard,payload.bookCode,payload.expire)
             yield put(finalDataCardSucceeded(finalToken))
+
+            const updateCinemaCardRes:AxiosResponse=yield call(updateCinemaCard,payload.bookCode,payload.expire)
         }
         
     

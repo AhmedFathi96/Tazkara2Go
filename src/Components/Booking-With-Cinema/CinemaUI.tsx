@@ -256,6 +256,7 @@ const CinemaUi=(props:IProps)=> {
                 pathname:`/select-chair`,
                 state: { 
                     data: {
+                        movie:props.movie,
                         showName:props.movie.ShowNam,
                         cinema:selectedCinema,
                         showDat:selectedFinalShowDate,
