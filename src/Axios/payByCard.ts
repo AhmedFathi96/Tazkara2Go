@@ -1,7 +1,13 @@
 import axios from 'axios';
 import * as Requests from './urls'
+
+const headers = {
+  'Accept-Language': 'es-ES,es;q=0.8',
+  "Content-Type": "application/x-www-form-urlencoded",
+  "Accept": "application/json"
+}
 export const updateCinemaCard=(cinemaIp:string,expireTime:string)=>{
-    return axios.get(Requests.updateCinemaCardUrl(cinemaIp,expireTime))}
+    return axios.get(Requests.updateCinemaCardUrl(cinemaIp,expireTime), {headers})}
     ////////////////////////////////////////////////
     export const finalDataCard=(token1:string,amount:string,id:string,email:string,startIndex:number,phone:string,name:string)=>{
         return axios.post(Requests.finalDataCardUrl,JSON.stringify({
